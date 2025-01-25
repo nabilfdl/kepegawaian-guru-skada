@@ -15,6 +15,18 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('nip')->unique();
+            $table->string('phone');
+            $table->enum('sex', ['male', 'female']);
+            $table->text('address');
+            $table->date('birth_date');
+            $table->string('birth_place');
+            $table->enum('religion', ['Islam', 'Protestant', 'Katolik']);
+            $table->foreignId('subject_id')->nullable()->constrained('subjects')->onDelete('set null');
+            $table->enum('position', ['PNS', 'P3K', 'Honorer']);
+            $table->enum('marital_status', ['belum kawin', 'sudah kawin']);
+            $table->enum('status', ['aktif', 'nonaktif']);
+            $table->enum('role', ['admin', 'operator', 'user']);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
