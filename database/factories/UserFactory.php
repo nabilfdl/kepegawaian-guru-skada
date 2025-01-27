@@ -2,9 +2,10 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Subject;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -24,10 +25,22 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'nip' => $this->faker->unique()->numerify('##########'), // Random 10-digit NIP
+            'name' => $this->faker->name,
+            'email' => $this->faker->unique()->safeEmail,
+            'phone' => $this->faker->phoneNumber,
+            'sex' => $this->faker->randomElement(['male', 'female']),
+            'address' => $this->faker->address,
+            'birth_date' => $this->faker->date('Y-m-d', '2000-01-01'),
+            'birth_place' => $this->faker->city,
+            'religion' => $this->faker->randomElement(['Islam', 'Protestant', 'Katolik']),
+            'subject_id' => random_int(1,5), // Optional or assign a valid subject_id
+            'position' => $this->faker->randomElement(['PNS', 'P3K', 'Honorer']),
+            'marital_status' => $this->faker->randomElement(['belum kawin', 'sudah kawin']),
+            'status' => $this->faker->randomElement(['aktif', 'nonaktif']),
+            'role' => $this->faker->randomElement(['admin', 'operator', 'user']),
             'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
+            'password' => Hash::make('password'), // Default password
             'remember_token' => Str::random(10),
         ];
     }
