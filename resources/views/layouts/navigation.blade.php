@@ -17,7 +17,7 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('data_guru')" :active="request()->routeIs('data_guru')">
+                    <x-nav-link :href="route('guru')" :active="request()->routeIs('data_guru')">
                         {{ __('Data Guru') }}
                     </x-nav-link>
                 </div>
@@ -36,11 +36,11 @@
                         {{ __('Verifikasi Data') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('tambah_akun')" :active="request()->routeIs('tambah_akun')">
                         {{ __('Tambah Akun') }}
                     </x-nav-link>
-                </div>
+                </div> --}}
             </div>
 
             <!-- Settings Dropdown -->
