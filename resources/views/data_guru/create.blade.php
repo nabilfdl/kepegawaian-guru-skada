@@ -23,7 +23,7 @@
             <div class="bg-white shadow-xl sm:rounded-lg p-6">
                 <h3 class="text-lg font-semibold text-gray-800 mb-4 text-center">Tambah Guru</h3>
                 
-                <form action="#" method="POST">
+                <form action="{{ route('data_guru.store') }}" method="POST">
                     @csrf
                     <div class="grid grid-cols-2 gap-6">
                         <div>
@@ -57,9 +57,9 @@
                             <label class="block text-gray-700">Posisi</label>
                             <select name="posisi" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
                                 <option value="">Pilih Posisi</option>
-                                <option value="Admin">Admin</option>
-                                <option value="Operator">Operator</option>
-                                <option value="User">User</option>
+                                <option value="admin">Admin</option>
+                                <option value="operator">Operator</option>
+                                <option value="user">User</option>
                             </select>
                         </div>
                         <div>
@@ -98,7 +98,7 @@
                     </div>
                     
                     <div class="mt-6 flex justify-between">
-                        <a href="{{ route('guru') }}" class="bg-red-800 text-white px-6 py-2 rounded-lg hover:bg-red-900 transition">
+                        <a href="{{ route('data_guru.index') }}" class="bg-red-800 text-white px-6 py-2 rounded-lg hover:bg-red-900 transition">
                             Cancel
                         </a>
                         <button type="submit" class="bg-black text-white px-6 py-2 rounded-lg hover:bg-gray-700 transition">

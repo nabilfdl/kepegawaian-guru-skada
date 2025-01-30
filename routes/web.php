@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
 });
 
 // New routes
-Route::get('/data_guru', [UserController::class, 'index'])->name('guru');
+Route::resource('/data_guru', UserController::class);
 
 Route::get('/statistik_guru', [UserController::class, 'statistik'])->name('statistik_guru');
 
@@ -45,7 +45,5 @@ Route::get('/ganti_posisi', function () {
 Route::get('/verifikasi_data', function () {
     return view('verifikasi_data');
 })->name('verifikasi_data');
-
-Route::get('/data_guru/create', [UserController::class, 'create'])->name('guru.create');
 
 require __DIR__.'/auth.php';
