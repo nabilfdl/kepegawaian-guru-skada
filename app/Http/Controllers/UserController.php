@@ -10,12 +10,24 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        return view('data_guru.index',[
-            'teachers' => User::get()
-        ]);
+    public function index(Request $request)
+{
+    $query = User::with('subject'); // Load the 'subject' relationship
+
+    if ($request->has('search')) {
+        $search = $request->search;
+        $query->where('name', 'like', "%$search%")
+              ->orWhere('nip', 'like', "%$search%")
+              ->orWhere('position', 'like', "%$search%")
+              ->orWhereHas('subject', function ($q) use ($search) {
+                  $q->where('subject_name', 'like', "%$search%");
+              });
     }
+
+    $teachers = $query->get(); // Fetch the filtered results
+
+    return view('data_guru.index', compact('teachers'));
+}
 
     /**
      * Show the form for creating a new resource.
