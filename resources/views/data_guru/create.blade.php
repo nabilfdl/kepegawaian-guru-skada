@@ -28,72 +28,89 @@
                     <div class="grid grid-cols-2 gap-6">
                         <div>
                             <label class="block text-gray-700">NIP</label>
-                            <input type="number" name="nip" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <input type="number" name="nip" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
                         </div>
                         <div>
                             <label class="block text-gray-700">Nama Lengkap</label>
-                            <input type="text" name="full_name" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <input type="text" name="name" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700">Nomor Telepon</label>
+                            <input type="number" name="phone" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700">Email</label>
+                            <input type="email" name="email" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
                         </div>
                         <div>
                             <label class="block text-gray-700">Agama</label>
-                            <select name="agama" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <select name="religion" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
                                 <option value="">Pilih Agama</option>
                                 <option value="Islam">Islam</option>
                                 <option value="Kristen">Kristen</option>
+                                <option value="Katolik">Katolik</option>
                                 <option value="Hindu">Hindu</option>
                                 <option value="Buddha">Buddha</option>
-                                <option value="Katolik">Katolik</option>
+                                <option value="Buddha">Konghucu</option>
                             </select>
                         </div>
                         <div>
                             <label class="block text-gray-700">Tempat Lahir</label>
-                            <input type="text" name="tempat_lahir" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <input type="text" name="birth_place" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
                         </div>
                         <div>
                             <label class="block text-gray-700">Tanggal Lahir</label>
-                            <input type="date" name="tanggal_lahir" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <input type="date" name="birth_date" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
                         </div>
                         <div>
                             <label class="block text-gray-700">Posisi</label>
-                            <select name="posisi" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <select name="role" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
                                 <option value="">Pilih Posisi</option>
-                                <option value="admin">Admin</option>
-                                <option value="operator">Operator</option>
-                                <option value="user">User</option>
+                                <option value="Admin">Admin</option>
+                                <option value="Operator">Operator</option>
+                                <option value="User">User</option>
                             </select>
                         </div>
                         <div>
                             <label class="block text-gray-700">Jenis Kelamin</label>
-                            <select name="jenis_kelamin" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <select name="sex" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
                                 <option value="">Pilih Jenis Kelamin</option>
-                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Laki-Laki">Laki-Laki</option>
                                 <option value="Perempuan">Perempuan</option>
                             </select>
                         </div>
                         <div>
                             <label class="block text-gray-700">Status Perkawinan</label>
-                            <select name="status_perkawinan" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <select name="marital_status" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
                                 <option value="">Pilih Status</option>
-                                <option value="Belum Menikah">Belum Menikah</option>
-                                <option value="Menikah">Menikah</option>
-                                <option value="Cerai">Cerai</option>
+                                <option value="Belum Kawin">Belum Kawin</option>
+                                <option value="Kawin">Kawin</option>
                             </select>
                         </div>
                         <div>
                             <label class="block text-gray-700">Alamat</label>
-                            <input type="text" name="alamat" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <input type="text" name="address" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
                         </div>
                         <div>
                             <label class="block text-gray-700">Mata Pelajaran</label>
-                            <input type="text" name="mata_pelajaran" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <select name="subject_id" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
+                                <option value="">Pilih Mata Pelajaran</option>
+                                @foreach ($subjects as $subject)
+                                    <option value="{{ $subject->id }}">{{ $subject->subject_name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div>
                             <label class="block text-gray-700">Status</label>
-                            <select name="status" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <select name="status" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
                                 <option value="">Pilih Status</option>
                                 <option value="Aktif">Aktif</option>
-                                <option value="Tidak Aktif">Tidak Aktif</option>
+                                <option value="Purna Tugas">Purna Tugas</option>
                             </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700">Password</label>
+                            <input type="password" name="password" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
                         </div>
                     </div>
                     
