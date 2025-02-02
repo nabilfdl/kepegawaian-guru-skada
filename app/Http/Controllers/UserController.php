@@ -113,4 +113,22 @@ class UserController extends Controller
     {
         //
     }
+
+    public function statistik()
+{
+    $sex = User::selectRaw('sex, COUNT(*) as jumlah')
+        ->groupBy('sex')
+        ->get();
+
+    $status = User::selectRaw('status, COUNT(*) as jumlah')
+        ->groupBy('status')
+        ->get();
+
+    $position = User::selectRaw('position, COUNT(*) as jumlah')
+        ->groupBy('position')
+        ->get();
+
+    return view('statistik_guru', compact('sex', 'status', 'position'));
+}
+
 }

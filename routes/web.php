@@ -36,9 +36,7 @@ Route::middleware('auth')->group(function () {
 // New routes
 Route::resource('/data_guru', UserController::class);
 
-Route::get('/statistik_guru', function () {
-    return view('statistik_guru');
-})->name('statistik_guru');
+Route::get('/statistik_guru', [UserController::class, 'statistik'])->name('statistik_guru');
 
 Route::get('/ganti_posisi', function () {
     return view('ganti_posisi');
