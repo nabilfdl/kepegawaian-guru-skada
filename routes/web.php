@@ -18,6 +18,9 @@ Route::get('/Ganti-Data', function () {
 Route::get('/UlangTahun', function () {
     return view('Ulang-Tahun');
 });
+Route::get('/Ganti-Password', function () {
+    return view('Ganti-Password');
+});
 
 
 Route::get('/dashboard', function () {
