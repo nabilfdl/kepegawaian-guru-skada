@@ -14,15 +14,15 @@
                 </div>
                 <div class="w-3/4">
                     <h3 class="text-xl font-semibold mb-2">Beranda</h3>
-                    <p><strong>Nama:</strong> Pak Jono</p>
-                    <p><strong>Tempat/Tanggal Lahir:</strong> 10-08-1945</p>
-                    <p><strong>Jenis Kelamin:</strong> Laki-laki</p>
-                    <p><strong>Alamat:</strong> Jl. Soekarno Hatta RT 01 No. 568...</p>
-                    <p><strong>Agama:</strong> Islam</p>
-                    <p><strong>Golongan:</strong> PNS</p>
-                    <p><strong>Status Perkawinan:</strong> Sudah Menikah</p>
-                    <p><strong>Mata Pelajaran:</strong> Rekayasa Perangkat Lunak</p>
-                    <p><strong>Status:</strong> Aktif</p>
+                    <p><strong>Nama:</strong> {{ Auth::user()->name }} </p>
+                    <p><strong>Tempat/Tanggal Lahir:</strong> {{ Auth::user()->birth_place }} / {{ Auth::user()->birth_date }}</p>
+                    <p><strong>Jenis Kelamin:</strong> {{ Auth::user()->sex }}</p>
+                    <p><strong>Alamat:</strong> {{ Auth::user()->address }}</p>
+                    <p><strong>Agama:</strong> {{ Auth::user()->religion }}</p>
+                    <p><strong>Golongan:</strong> {{ Auth::user()->position }}</p>
+                    <p><strong>Status Perkawinan:</strong> {{ Auth::user()->marital_status }}</p>
+                    <p><strong>Mata Pelajaran:</strong> {{ Auth::user()->subject->subject_name }}</p>
+                    <p><strong>Status:</strong> {{ Auth::user()->status }}</p>
                 </div>
             </div>
 
@@ -87,4 +87,6 @@
             </div>
         </div>
     </div>
+
+     
 </x-app-layout>
