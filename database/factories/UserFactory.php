@@ -36,7 +36,7 @@ class UserFactory extends Factory
             'religion' => $this->faker->randomElement(['Islam', 'Protestan', 'Katolik', 'Hindu', 'Buddha', 'Konghucu']),
             'subject_id' => random_int(1,5), // Optional or assign a valid subject_id
             'position' => $this->faker->randomElement(['PNS', 'P3K', 'Honorer']),
-            'marital_status' => $this->faker->randomElement(['Belum Kawin', 'Sudah Kawin']),
+            'marital_status' => $this->faker->randomElement(['Belum Kawin', 'Kawin']),
             'status' => $this->faker->randomElement(['Aktif', 'Purna Tugas']),
             'role' => $this->faker->randomElement(['Admin', 'Operator', 'User']),
             'email_verified_at' => now(),
