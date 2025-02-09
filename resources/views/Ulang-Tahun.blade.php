@@ -121,20 +121,7 @@
             Dibuat dengan ❤️ oleh Nabmiao
             <a href="https://yourwebsite.com" class="text-blue-400 hover:underline">Tim Developer</a>
         </p>
-        <div class="flex justify-center space-x-4 mt-4">
-            <a href="#" class="text-gray-400 hover:text-white">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="#" class="text-gray-400 hover:text-white">
-                <i class="fab fa-twitter"></i>
-            </a>
-            <a href="#" class="text-gray-400 hover:text-white">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="#" class="text-gray-400 hover:text-white">
-                <i class="fab fa-linkedin-in"></i>
-            </a>
-        </div>
+        
     </div>
 </footer>
 
