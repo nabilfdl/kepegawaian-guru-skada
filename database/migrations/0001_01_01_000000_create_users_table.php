@@ -24,7 +24,7 @@ return new class extends Migration
             $table->enum('religion', ['Islam', 'Protestan', 'Katolik', 'Hindu', 'Buddha', 'Konghucu']);
             $table->foreignId('subject_id')->nullable()->constrained('subjects')->onDelete('set null');
             $table->enum('position', ['PNS', 'P3K', 'Honorer']);
-            $table->enum('marital_status', ['Belum Kawin', 'Sudah Kawin']);
+            $table->enum('marital_status', ['Belum Kawin', 'Kawin']);
             $table->enum('status', ['Aktif', 'Purna Tugas']);
             $table->enum('role', ['Admin', 'Operator', 'User']);
             $table->timestamp('email_verified_at')->nullable();
