@@ -34,7 +34,9 @@ Route::middleware('auth')->group(function () {
 });
 
 // New routes
-Route::resource('/data_guru', UserController::class);
+Route::resource('/data_guru', UserController::class)->parameters([
+    'data_guru' => 'user'
+]);
 
 Route::get('/statistik_guru', [UserController::class, 'statistik'])->name('statistik_guru');
 

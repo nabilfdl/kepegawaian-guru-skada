@@ -87,7 +87,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return view('data_guru.show', compact('user'));
     }
 
     /**
@@ -95,7 +95,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $subjects = Subject::all();
+        return view('data_guru.edit', compact('user', 'subjects'));
     }
 
     /**
@@ -103,7 +104,41 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'nip' => 'required|numeric|digits_between:5,20|unique:users,nip,' . $user->id,
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|unique:users,phone,' . $user->id,
+            'religion' => 'required|in:Islam,Kristen,Hindu,Buddha,Katolik,Konghucu',
+            'email' => 'required|string|lowercase|email|max:255|unique:users,email,' . $user->id,
+            'birth_place' => 'required|string|max:255',
+            'birth_date' => 'required|date',
+            'role' => 'required|in:Admin,Operator,User',
+            'sex' => 'required|in:Laki-Laki,Perempuan',
+            'marital_status' => 'required|in:Belum Kawin,Kawin',
+            'address' => 'required|string|max:500',
+            'subject_id' => 'required',
+            'status' => 'required|in:Aktif,Purna Tugas',
+        ]);
+
+        $user->update([
+            'nip' => $request->nip,
+            'name' => $request->name,
+            'religion' => $request->religion,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'birth_place' => $request->birth_place,
+            'birth_date' => $request->birth_date,
+            'role' => $request->role,
+            'sex' => $request->sex,
+            'marital_status' => $request->marital_status,
+            'address' => $request->address,
+            'subject_id' => $request->subject_id,
+            'status' => $request->status,
+            // Only update the password if a new one is provided
+            'password' => $request->password ? Hash::make($request->password) : $user->password,
+        ]);
+
+        return redirect()->route('data_guru.index')->with('success', 'Data guru berhasil diperbarui.');
     }
 
     /**
@@ -111,7 +146,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        User::destroy($user->id);
+        return redirect()->route('data_guru.index')->with('success', 'A user has been deleted');
     }
 
     public function statistik()

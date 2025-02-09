@@ -17,8 +17,8 @@
                             <ul class="text-sm">
                                 @foreach ($sex as $s)
                                     <li class="flex items-center gap-2">
-                                        <span class="w-4 h-4 {{ $s->sex == 'male' ? 'bg-blue-400' : 'bg-yellow-300' }} inline-block"></span> 
-                                        {{ $s->sex == 'male' ? 'Laki-Laki' : 'Perempuan' }}: {{ $s->jumlah }}
+                                        <span class="w-4 h-4 {{ $s->sex == 'Laki-Laki' ? 'bg-blue-400' : 'bg-yellow-300' }} inline-block"></span> 
+                                        {{ $s->sex == 'Laki-Laki' ? 'Laki-Laki' : 'Perempuan' }}: {{ $s->jumlah }}
                                     </li>
                                 @endforeach
                             </ul>
@@ -66,7 +66,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const sexData = {
-                labels: @json($sex->pluck('sex')->map(fn($s) => $s == 'male' ? 'Laki-Laki' : 'Perempuan')),
+                labels: @json($sex->pluck('sex')->map(fn($s) => $s == 'Laki-Laki' ? 'Laki-Laki' : 'Perempuan')),
                 datasets: [{
                     data: @json($sex->pluck('jumlah')),
                     backgroundColor: ['#60A5FA', '#FBBF24']

@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('nip')->unique();
+            $table->bigInteger('nip')->unique();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('phone');
+            $table->string('phone')->unique();
             $table->enum('sex', ['Laki-Laki', 'Perempuan']);
             $table->text('address');
             $table->date('birth_date');

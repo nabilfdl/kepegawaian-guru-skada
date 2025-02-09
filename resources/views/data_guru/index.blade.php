@@ -57,15 +57,17 @@
                                     <td class="border p-2">{{ $teacher->role }}</td>
                                     <td class="border p-2">
                                         <div class="flex space-x-2 justify-center">
-                                            <a href="#" class="px-2 py-1 bg-teal-500 text-white rounded-md hover:bg-teal-600 transition-colors duration-200">
+                                            <a href="{{ route('data_guru.show', $teacher->id) }}" class="px-2 py-1 bg-teal-500 text-white rounded-md hover:bg-teal-600 transition-colors duration-200">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="#" class="px-2 py-1 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition-colors duration-200">
+                                            <a href="{{ route('data_guru.edit', $teacher->id) }}" class="px-2 py-1 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition-colors duration-200">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <a href="#" class="px-2 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors duration-200">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
+                                            <form method="POST" action="{{ route('data_guru.destroy', $teacher->id) }}" class="inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button onclick="return confirm('Are you sure tho?')" class="px-2 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors duration-200"><i class="fas fa-trash"></i></button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>
