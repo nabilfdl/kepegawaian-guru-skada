@@ -10,9 +10,11 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
                 <div class="flex justify-between items-center mb-4">
-                    <form action="{{ route('data_guru.index') }}" method="GET">
-                        <input type="text" name="search" placeholder="Search..." value="{{ request('search') }}" class="border rounded-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300">
-                        <button type="submit" class="bg-blue-500 p-2 text-white">Search</button>
+                    <form action="{{ route('data_guru.index') }}" method="GET" class="flex items-center">
+                        <input type="text" name="search" placeholder="Search..." value="{{ request('search') }}" class="border rounded-l-md px-3 py-2 focus:outline-none focus:ring focus:border-blue-300">
+                        <button type="submit" class="bg-blue-500 w-10 h-10 flex items-center justify-center text-white rounded-r-md hover:bg-blue-600 transition-colors duration-200 ml-2">
+                            <i class="fas fa-search"></i>
+                        </button>
                     </form>
                     <a href="{{ route('data_guru.create') }}" class="inline-flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors duration-200">
                         <i class="fas fa-user-plus mr-2"></i>
