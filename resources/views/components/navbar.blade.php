@@ -46,7 +46,7 @@
     x-transition:leave-start="opacity-100 scale-100"
     x-transition:leave-end="opacity-0 scale-95"class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 ring-1 shadow-lg ring-black/5 focus:outline-hidden" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                 <!-- Active: "bg-gray-100 outline-hidden", Not Active: "" -->
-                <a href="/gantipassword" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Ganti Password</a>
+                <a href="/Ganti-Password" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Ganti Password</a>
                 <a href="/logout" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Log out</a>
               </div>
             </div>
@@ -92,7 +92,7 @@
           </div>  
         </div>
         <div class="mt-3 space-y-1 px-2">
-          <a href="/Ganti Password" class="block rounded-md px-3 py-2 text-base font-semibold text-gray-400 hover:bg-gray-700 hover:text-white">Ganti Password</a>
+          <a href="/Ganti-Password" class="block rounded-md px-3 py-2 text-base font-semibold text-gray-400 hover:bg-gray-700 hover:text-white">Ganti Password</a>
           <a href="/Logout" class="block rounded-md px-3 py-2 text-base font-semibold text-gray-400 hover:bg-gray-700 hover:text-white">Log out</a>
         </div>
       </div>

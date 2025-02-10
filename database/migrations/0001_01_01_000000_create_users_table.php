@@ -13,20 +13,20 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('nip')->unique();
+            $table->bigInteger('nip')->unique();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('phone');
-            $table->enum('sex', ['male', 'female']);
+            $table->string('phone')->unique();
+            $table->enum('sex', ['Laki-Laki', 'Perempuan']);
             $table->text('address');
             $table->date('birth_date');
             $table->string('birth_place');
-            $table->enum('religion', ['Islam', 'Protestant', 'Katolik']);
+            $table->enum('religion', ['Islam', 'Protestan', 'Katolik', 'Hindu', 'Buddha', 'Konghucu']);
             $table->foreignId('subject_id')->nullable()->constrained('subjects')->onDelete('set null');
             $table->enum('position', ['PNS', 'P3K', 'Honorer']);
-            $table->enum('marital_status', ['belum kawin', 'sudah kawin']);
-            $table->enum('status', ['aktif', 'nonaktif']);
-            $table->enum('role', ['admin', 'operator', 'user']);
+            $table->enum('marital_status', ['Belum Kawin', 'Kawin']);
+            $table->enum('status', ['Aktif', 'Purna Tugas']);
+            $table->enum('role', ['Admin', 'Operator', 'User']);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

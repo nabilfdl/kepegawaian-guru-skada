@@ -44,7 +44,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const sexData = {
-                labels: @json($sex->pluck('sex')->map(fn($s) => $s == 'male' ? 'Laki-Laki' : 'Perempuan')),
+                labels: @json($sex->pluck('sex')->map(fn($s) => $s == 'Laki-Laki' ? 'Laki-Laki' : 'Perempuan')),
                 datasets: [{
                     data: @json($sex->pluck('jumlah')),
                     backgroundColor: ['#60A5FA', '#FBBF24']
