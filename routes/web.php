@@ -12,7 +12,7 @@ Route::get('/', function () {
 Route::get('/Beranda', function () {
     return view('Beranda');
 });
-Route::get('/Ganti-Data', function () {
+Route::get('/GantiData', function () {
     return view('Ganti-Data');
 });
 Route::get('/UlangTahun', function () {
@@ -45,5 +45,9 @@ Route::get('/ganti_posisi', function () {
 Route::get('/verifikasi_data', function () {
     return view('verifikasi_data');
 })->name('verifikasi_data');
+
+Route::get('/view_data', function () {
+    return view('view_data');
+})->name('view_data');
 
 require __DIR__.'/auth.php';

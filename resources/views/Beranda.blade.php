@@ -17,6 +17,7 @@
   <body class="h-full">
   ```
 -->
+
 <div class="min-h-full">
   <x-Navbar></x-Navbar>
 

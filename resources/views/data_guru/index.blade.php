@@ -57,7 +57,7 @@
                                     <td class="border p-2">{{ $teacher->role }}</td>
                                     <td class="border p-2">
                                         <div class="flex space-x-2 justify-center">
-                                            <a href="#" class="px-2 py-1 bg-teal-500 text-white rounded-md hover:bg-teal-600 transition-colors duration-200">
+                                            <a href="/view_data" class="px-2 py-1 bg-teal-500 text-white rounded-md hover:bg-teal-600 transition-colors duration-200">
                                                 <i class="fas fa-eye"></i>
                                             </a>
                                             <a href="#" class="px-2 py-1 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 transition-colors duration-200">
