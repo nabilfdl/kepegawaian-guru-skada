@@ -36,39 +36,47 @@
                     <h3 class="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">Profil Saya</h3>
                     <div class="grid grid-cols-2 gap-4">
                         <div class="space-y-3">
-                            <p class="flex items-center space-x-2">
-                                <span class="text-gray-600 dark:text-gray-400">Nama:</span>
-                                <span class="font-medium text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</span>
+                            <p class="flex items-center">
+                                <span class="text-gray-600 dark:text-gray-400 w-40">Nama</span>
+                                <span class="text-gray-600 dark:text-gray-400">:</span>
+                                <span class="font-medium text-gray-800 dark:text-gray-200 ml-2">{{ Auth::user()->name }}</span>
                             </p>
-                            <p class="flex items-center space-x-2">
-                                <span class="text-gray-600 dark:text-gray-400">Tempat/Tanggal Lahir:</span>
-                                <span class="font-medium text-gray-800 dark:text-gray-200">{{ Auth::user()->birth_place }} / {{ Auth::user()->birth_date }}</span>
+                            <p class="flex items-center">
+                                <span class="text-gray-600 dark:text-gray-400 w-40">Tempat/Tanggal Lahir</span>
+                                <span class="text-gray-600 dark:text-gray-400">:</span>
+                                <span class="font-medium text-gray-800 dark:text-gray-200 ml-2">{{ Auth::user()->birth_place }} / {{ Auth::user()->birth_date }}</span>
                             </p>
-                            <p class="flex items-center space-x-2">
-                                <span class="text-gray-600 dark:text-gray-400">Jenis Kelamin:</span>
-                                <span class="font-medium text-gray-800 dark:text-gray-200">{{ Auth::user()->sex }}</span>
+                            <p class="flex items-center">
+                                <span class="text-gray-600 dark:text-gray-400 w-40">Jenis Kelamin</span>
+                                <span class="text-gray-600 dark:text-gray-400">:</span>
+                                <span class="font-medium text-gray-800 dark:text-gray-200 ml-2">{{ Auth::user()->sex }}</span>
                             </p>
-                            <p class="flex items-center space-x-2">
-                                <span class="text-gray-600 dark:text-gray-400">Alamat:</span>
-                                <span class="font-medium text-gray-800 dark:text-gray-200">{{ Auth::user()->address }}</span>
+                            <p class="flex items-center">
+                                <span class="text-gray-600 dark:text-gray-400 w-40">Alamat</span>
+                                <span class="text-gray-600 dark:text-gray-400">:</span>
+                                <span class="font-medium text-gray-800 dark:text-gray-200 ml-2">{{ Auth::user()->address }}</span>
                             </p>
                         </div>
                         <div class="space-y-3">
-                            <p class="flex items-center space-x-2">
-                                <span class="text-gray-600 dark:text-gray-400">Agama:</span>
-                                <span class="font-medium text-gray-800 dark:text-gray-200">{{ Auth::user()->religion }}</span>
+                            <p class="flex items-center">
+                                <span class="text-gray-600 dark:text-gray-400 w-40">Agama</span>
+                                <span class="text-gray-600 dark:text-gray-400">:</span>
+                                <span class="font-medium text-gray-800 dark:text-gray-200 ml-2">{{ Auth::user()->religion }}</span>
                             </p>
-                            <p class="flex items-center space-x-2">
-                                <span class="text-gray-600 dark:text-gray-400">Golongan:</span>
-                                <span class="font-medium text-gray-800 dark:text-gray-200">{{ Auth::user()->position }}</span>
+                            <p class="flex items-center">
+                                <span class="text-gray-600 dark:text-gray-400 w-40">Golongan</span>
+                                <span class="text-gray-600 dark:text-gray-400">:</span>
+                                <span class="font-medium text-gray-800 dark:text-gray-200 ml-2">{{ Auth::user()->position }}</span>
                             </p>
-                            <p class="flex items-center space-x-2">
-                                <span class="text-gray-600 dark:text-gray-400">Status Perkawinan:</span>
-                                <span class="font-medium text-gray-800 dark:text-gray-200">{{ Auth::user()->marital_status }}</span>
+                            <p class="flex items-center">
+                                <span class="text-gray-600 dark:text-gray-400 w-40">Status Perkawinan</span>
+                                <span class="text-gray-600 dark:text-gray-400">:</span>
+                                <span class="font-medium text-gray-800 dark:text-gray-200 ml-2">{{ Auth::user()->marital_status }}</span>
                             </p>
-                            <p class="flex items-center space-x-2">
-                                <span class="text-gray-600 dark:text-gray-400">Mata Pelajaran:</span>
-                                <span class="font-medium text-gray-800 dark:text-gray-200">{{ Auth::user()->subject->subject_name }}</span>
+                            <p class="flex items-center">
+                                <span class="text-gray-600 dark:text-gray-400 w-40">Mata Pelajaran</span>
+                                <span class="text-gray-600 dark:text-gray-400">:</span>
+                                <span class="font-medium text-gray-800 dark:text-gray-200 ml-2">{{ Auth::user()->subject->subject_name }}</span>
                             </p>
                         </div>
                     </div>
