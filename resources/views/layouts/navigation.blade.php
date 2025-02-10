@@ -26,14 +26,28 @@
                         {{ __('Statistik Guru') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('ganti_posisi')" :active="request()->routeIs('ganti_posisi')">
                         {{ __('Ganti Posisi ') }}
                     </x-nav-link>
-                </div>
+                </div> --}}
+                @if (Auth::user()->role === 'Admin' || Auth::user()->role === 'Operator')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('verifikasi_data')" :active="request()->routeIs('verifikasi_data')">
+                            {{ __('Verifikasi Data') }}
+                        </x-nav-link>
+                    </div>
+                @endif
+                @if (Auth::user()->role === 'User')
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('edit-data-diri')" :active="request()->routeIs('edit-data-diri')">
+                            {{ __('Edit Data Diri') }}
+                        </x-nav-link>
+                    </div>
+                @endif
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('verifikasi_data')" :active="request()->routeIs('verifikasi_data')">
-                        {{ __('Verifikasi Data') }}
+                    <x-nav-link :href="route('ulang-tahun')" :active="request()->routeIs('ulang-tahun')">
+                        {{ __('Ulang Tahun') }}
                     </x-nav-link>
                 </div>
                 {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">

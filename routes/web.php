@@ -6,18 +6,19 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ProvinceController;
 
+Route::get('/ulang-tahun', function () {
+    return view('ulang-tahun');
+})->name('ulang-tahun');
+
 Route::get('/', function () {
     return view('dashboard');
 })->middleware('auth');
 Route::get('/Beranda', function () {
     return view('Beranda');
 });
-Route::get('/Ganti-Data', function () {
-    return view('Ganti-Data');
-});
-Route::get('/UlangTahun', function () {
-    return view('Ulang-Tahun');
-});
+Route::get('/edit-data-diri', function () {
+    return view('edit-data-diri');
+})->name('edit-data-diri');
 Route::get('/Ganti-Password', function () {
     return view('Ganti-Password');
 });
