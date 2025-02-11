@@ -1,14 +1,13 @@
 <?php
 
+use App\Http\Controllers\BirthdayController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ProvinceController;
 
-Route::get('/ulang-tahun', function () {
-    return view('ulang-tahun');
-})->name('ulang-tahun');
+Route::get('/ulang-tahun', [BirthdayController::class, 'birthday'])->name('ulang-tahun');
 
 Route::get('/', function () {
     return view('dashboard');
@@ -19,9 +18,13 @@ Route::get('/Beranda', function () {
 Route::get('/edit-data-diri', function () {
     return view('edit-data-diri');
 })->name('edit-data-diri');
+
+Route::get('/UlangTahun', function () {
+    return view('Ulang-Tahun');
+});
 Route::get('/Ganti-Password', function () {
     return view('Ganti-Password');
-});
+})->name('ganti-password');
 
 
 Route::get('/dashboard', function () {
@@ -51,5 +54,9 @@ Route::get('/ganti_posisi', function () {
 Route::get('/verifikasi_data', function () {
     return view('verifikasi_data');
 })->name('verifikasi_data');
+
+Route::get('/view_data', function () {
+    return view('view_data');
+})->name('view_data');
 
 require __DIR__.'/auth.php';

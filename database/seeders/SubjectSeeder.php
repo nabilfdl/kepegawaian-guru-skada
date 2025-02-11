@@ -16,24 +16,24 @@ class SubjectSeeder extends Seeder
         // Manually create 5 subjects
         $subjects = [
             [
-                'subject_name' => 'Mathematics',
-                'description' => 'The study of numbers, shapes, and patterns.',
+                'subject_name' => 'Matematika',
+                'description' => 'Pelajaran yang berkaitan dengan angka dan menghitung.',
             ],
             [
-                'subject_name' => 'Physics',
-                'description' => 'The study of matter, energy, and the laws of nature.',
+                'subject_name' => 'Fisika',
+                'description' => 'Pelajaran tentang energi dan berkaitan dengan hukum alam',
             ],
             [
-                'subject_name' => 'Chemistry',
-                'description' => 'The study of substances, their properties, and reactions.',
+                'subject_name' => 'Kimia',
+                'description' => 'Pelajaran tentang senyawa dan zat',
             ],
             [
-                'subject_name' => 'Biology',
-                'description' => 'The study of living organisms and their life processes.',
+                'subject_name' => 'Biologi',
+                'description' => 'Pelajaran tentang makhluk hidup dan cara mereka hidup.',
             ],
             [
-                'subject_name' => 'English',
-                'description' => 'The study of the English language, grammar, and literature.',
+                'subject_name' => 'Bahasa Inggris',
+                'description' => 'Pelajaran yang mempelajari Bahasa Inggris dan literatur dalam Bahasa Inggris.',
             ],
         ];
 

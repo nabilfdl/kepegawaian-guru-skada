@@ -1,13 +1,87 @@
-<!DOCTYPE html >
-<html lang="en" class="h-full bg-gray-100">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  @vite('resources/css/app.css')
-  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  <title>Ulang Tahun Pegawai</title>
-  <script>
+<x-app-layout>
+    <x-slot name="header">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Ulang Tahun Pegawai') }}
+        </h2>
+    </x-slot>
+    
+    <div class="py-6">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
+                <!-- Card Header dengan Background -->
+                <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-4 text-white">
+                    <div class="flex justify-between items-center">
+                        <!-- Search Bar yang Lebih Menarik -->
+                        <form action="{{ route('ulang-tahun') }}" method="GET" class="flex items-center">
+                            <div class="relative">
+                                <input type="text" name="search" placeholder="Cari pegawai..." value="{{ request('search') }}" 
+                                    class="w-64 pl-10 pr-4 py-2 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <div class="absolute left-3 top-2.5 text-gray-400">
+                                    <i class="fas fa-search"></i>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Tabel dengan Desain yang Lebih Modern -->
+                <div class="overflow-x-auto p-4">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="bg-gray-50 dark:bg-gray-700">
+                                <th class="px-4 py-3 text-left text-sm font-semibold text-gray-600 dark:text-gray-200">No</th>
+                                <th class="px-4 py-3 text-left text-sm font-semibold text-gray-600 dark:text-gray-200">Nama Pegawai</th>
+                                <th class="px-4 py-3 text-left text-sm font-semibold text-gray-600 dark:text-gray-200">Tanggal Lahir</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 dark:divide-gray-700">
+                            @foreach ($users as $user)
+                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
+                                    <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-200">{{ $user->nip }}</td>
+                                    <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-200">{{ $user->name }}</td>
+                                    <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-200">{{ $user->birth_date }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="mt-4 flex justify-between items-center">
+                    <span id="info-pagination" class="text-sm text-semibold"></span>
+                    <div>
+                        <button id="prev-btn" class="border border-gray-500 rounded-md px-3 py-2 text-gray-900 hover:bg-gray-200">Sebelumnya</button>
+                        <button id="next-btn" class="border border-gray-500 rounded-md px-3 py-2 text-gray-900 hover:bg-gray-200">Berikutnya</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tambahkan CSS untuk tooltip -->
+    <style>
+        .tooltip {
+            position: relative;
+        }
+        .tooltip:hover::after {
+            content: attr(title);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 4px 8px;
+            background-color: rgba(0,0,0,0.8);
+            color: white;
+            font-size: 12px;
+            border-radius: 4px;
+            white-space: nowrap;
+            z-index: 10;
+        }
+    </style>
+
+    <!-- JavaScript for Pagination -->
+    <script>
         document.addEventListener("DOMContentLoaded", function () {
             const dataPegawai = [
                 { no: 1, nama: "Nabilul", tanggal: "10-01-2020" },
@@ -72,61 +146,4 @@
             renderTable();
         });
     </script>
-</head>
-
-<body>
-  <!--
-  This example requires updating your template:
-
-  ```
-  <html class="h-full bg-gray-100">
-  <body class="h-full">
-  ```
--->
-<div class="min-h-full">
-<x-Navbar> </x-Navbar>
-
-<x-header> Table Ulang Tahun </x-header>
-  <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <h1 class="text-3xl font-bold tracking-tight text-gray-900 mb-4 text-center">Pegawai Yang Berulang Tahun Bulan Ini</h1>
-        <br>
-
-        <div class="overflow-x-auto">
-            <table class="min-w-full bg-white border border-gray-300">
-                <thead>
-                    <tr>
-                    <th class="py-2 px-4 border-b text-left bg-yellow-400 text-semibold">No</th>
-                    <th class="py-2 px-4 border-b text-left bg-yellow-400 text-semibold">Nama Pegawai</th>
-                    <th class="py-2 px-4 border-b text-left bg-yellow-400 text-semibold">Tanggal Lahir</th>
-                    </tr>
-                </thead>
-                <tbody id="pegawai-body"></tbody>
-            </table>
-        </div>
-
-        <div class="mt-4 flex justify-between items-center">
-            <span id="info-pagination" class="text-sm text-semibold"></span>
-            <div>
-                <button id="prev-btn" class="border border-gray-500 rounded-md px-3 py-2 text-gray-900 hover:bg-gray-200">Sebelumnya</button>
-                <button id="next-btn" class="border border-gray-500 rounded-md px-3 py-2 text-gray-900 hover:bg-gray-200">Berikutnya</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- footers -->
-    <footer class="bg-gray-800 text-white py-6 mt-10">
-    <div class="container mx-auto px-4 text-center">
-        <p class="text-sm">© 2025 SMKN 2 SIGMA SIGMA BOI.</p>
-        <p class="text-sm mt-2">
-            Dibuat dengan ❤️ oleh Nabmiao
-            <a href="https://yourwebsite.com" class="text-blue-400 hover:underline">Tim Developer</a>
-        </p>
-        
-    </div>
-</footer>
-
-<!-- Footers -->
-
-</body>
-
-</html>
+</x-app-layout>

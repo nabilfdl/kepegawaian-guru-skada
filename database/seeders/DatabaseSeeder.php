@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
             'religion' => 'Islam',
             'subject_id' => 1, // Assuming subject_id 1 exists in the subjects table
             'position' => 'PNS',
-            'marital_status' => 'Sudah Kawin',
+            'marital_status' => 'Kawin',
             'status' => 'Aktif',
             'role' => 'Admin',
             'email_verified_at' => now(),

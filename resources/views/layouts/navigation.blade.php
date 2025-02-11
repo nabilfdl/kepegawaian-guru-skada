@@ -16,11 +16,13 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                @if (Auth::user()->role === 'Admin' || Auth::user()->role === 'Operator')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('data_guru.index')" :active="request()->routeIs('data_guru.index')">
                         {{ __('Data Guru') }}
                     </x-nav-link>
                 </div>
+                @endif
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('statistik_guru')" :active="request()->routeIs('statistik_guru')">
                         {{ __('Statistik Guru') }}
@@ -73,8 +75,8 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                        <x-dropdown-link :href="route('ganti-password')">
+                            {{ __('Ganti Password') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->
