@@ -18,9 +18,6 @@ Route::get('/GantiData', function () {
 Route::get('/UlangTahun', function () {
     return view('Ulang-Tahun');
 });
-Route::get('/Ganti-Password', function () {
-    return view('Ganti-Password');
-});
 
 
 Route::get('/dashboard', function () {
@@ -37,9 +34,7 @@ Route::middleware('auth')->group(function () {
 });
 
 // New routes
-Route::resource('/data_guru', UserController::class)->parameters([
-    'data_guru' => 'user'
-]);
+Route::resource('/data_guru', UserController::class);
 
 Route::get('/statistik_guru', [UserController::class, 'statistik'])->name('statistik_guru');
 
