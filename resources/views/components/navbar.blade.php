@@ -9,7 +9,7 @@
             <div class="ml-10 flex items-baseline space-x-4">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
               <a href="/Beranda" class="{{ request()->is('Beranda')? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} rounded-md  px-3 py-2 text-sm font-semibold" aria-current="page">Beranda</a>
-              <a href="/UlangTahun" class="{{ request()->is('UlangTahun')? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} rounded-md  px-3 py-2 text-sm font-semibold" aria-current="page">Ulang Tahun</a>      
+              <a href="/Ulang-Tahun" class="{{ request()->is('UlangTahun')? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} rounded-md  px-3 py-2 text-sm font-semibold" aria-current="page">Ulang Tahun</a>      
               <a href="/Ganti-Data" class="{{ request()->is('Ganti-Data')? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white'}} rounded-md  px-3 py-2 text-sm font-semibold" aria-current="page">Edit Data</a>
             </div>
         </div>

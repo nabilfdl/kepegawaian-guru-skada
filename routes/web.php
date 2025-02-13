@@ -1,27 +1,27 @@
 <?php
 
+use App\Http\Controllers\BirthdayController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ProvinceController;
-use App\Http\Controllers\DashboardController;
 
-
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/ulang-tahun', [BirthdayController::class, 'birthday'])->name('ulang-tahun');
 
 Route::get('/Beranda', function () {
     return view('Beranda');
 });
-Route::get('/Ganti-Data', function () {
-    return view('Ganti-Data');
-});
+Route::get('/edit-data-diri', function () {
+    return view('edit-data-diri');
+})->name('edit-data-diri');
+
 Route::get('/UlangTahun', function () {
     return view('Ulang-Tahun');
 });
 Route::get('/Ganti-Password', function () {
     return view('Ganti-Password');
-});
+})->name('ganti-password');
 
 
 Route::get('/dashboard', function () {
@@ -51,5 +51,9 @@ Route::get('/ganti_posisi', function () {
 Route::get('/verifikasi_data', function () {
     return view('verifikasi_data');
 })->name('verifikasi_data');
+
+Route::get('/view_data', function () {
+    return view('view_data');
+})->name('view_data');
 
 require __DIR__.'/auth.php';
