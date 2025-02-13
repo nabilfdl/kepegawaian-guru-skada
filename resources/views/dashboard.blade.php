@@ -62,29 +62,32 @@
                 </table>
             </div>
 
-            <!-- Statistik Guru -->
-            <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="bg-white white:bg-gray-800 p-4 rounded-lg shadow-md text-center">
-                    <p class="text-lg font-semibold">Jumlah Guru</p>
-                    <p class="text-2xl font-bold">75</p>
-                    <button class="mt-2 px-4 py-2 bg-gray-700 text-white rounded-lg">View</button>
-                </div>
-                <div class="bg-white white:bg-gray-800 p-4 rounded-lg shadow-md text-center">
-                    <p class="text-lg font-semibold">Aktif/Nonaktif</p>
-                    <p class="text-2xl font-bold">75</p>
-                    <button class="mt-2 px-4 py-2 bg-gray-700 text-white rounded-lg">View</button>
-                </div>
-                <div class="bg-white white:bg-gray-800 p-4 rounded-lg shadow-md text-center">
-                    <p class="text-lg font-semibold">Golongan</p>
-                    <p class="text-2xl font-bold">75</p>
-                    <button class="mt-2 px-4 py-2 bg-gray-700 text-white rounded-lg">View</button>
-                </div>
-                <div class="bg-white white:bg-gray-800 p-4 rounded-lg shadow-md text-center">
-                    <p class="text-lg font-semibold">Jenis Kelamin</p>
-                    <p class="text-2xl font-bold">75</p>
-                    <button class="mt-2 px-4 py-2 bg-gray-700 text-white rounded-lg">View</button>
-                </div>
-            </div>
-        </div>
+<!-- Statistik Guru -->
+<div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md text-center">
+        <p class="text-lg font-semibold">Jumlah Guru</p>
+        <p class="text-2xl font-bold">{{ $totalTeachers ?? 0 }}</p>
+        <button class="mt-2 px-4 py-2 bg-gray-700 text-white rounded-lg">View</button>
     </div>
+    
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md text-center">
+        <p class="text-lg font-semibold">Aktif / Nonaktif</p>
+        <p class="text-2xl font-bold">{{ $activeTeachers ?? 0 }} / {{ $inactiveTeachers ?? 0 }}</p>
+        <button class="mt-2 px-4 py-2 bg-gray-700 text-white rounded-lg">View</button>
+    </div>
+
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md text-center">
+        <p class="text-lg font-semibold">Total Golongan</p>
+        <p class="text-2xl font-bold">{{ !empty($groupByPosition) ? count($groupByPosition) : 0 }}</p>
+        <button class="mt-2 px-4 py-2 bg-gray-700 text-white rounded-lg">View</button>
+    </div>
+
+    <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md text-center">
+        <p class="text-lg font-semibold">Jenis Kelamin</p>
+        <p class="text-2xl font-bold">
+            L: {{ $genderStats['Laki-laki'] ?? 0 }} / P: {{ $genderStats['Perempuan'] ?? 0 }}
+        </p>
+        <button class="mt-2 px-4 py-2 bg-gray-700 text-white rounded-lg">View</button>
+    </div>
+</div
 </x-app-layout>
