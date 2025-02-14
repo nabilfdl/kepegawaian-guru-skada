@@ -28,7 +28,7 @@ class UserController extends Controller
 
     $teachers = $query->get(); // Fetch the filtered results
 
-    return view('data_guru.index', compact('teachers'));
+    return view('data_pegawai.index', compact('teachers'));
 }
 
     /**
@@ -37,7 +37,7 @@ class UserController extends Controller
     public function create()
     {
         $subjects = Subject::all();
-        return view('data_guru.create', compact('subjects'));
+        return view('data_pegawai.create', compact('subjects'));
     }
 
     /**
@@ -79,7 +79,7 @@ class UserController extends Controller
             'email_verified_at' => now(), // Automatically verify email
         ]);
     
-        return redirect()->route('data_guru.index')->with('success', 'Data guru berhasil ditambahkan.');
+        return redirect()->route('data_pegawai.index')->with('success', 'Data guru berhasil ditambahkan.');
     }
 
     /**
@@ -87,7 +87,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('data_guru.show', compact('user'));
+        return view('data_pegawai.show', compact('user'));
     }
 
     /**
@@ -96,7 +96,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $subjects = Subject::all();
-        return view('data_guru.edit', compact('user', 'subjects'));
+        return view('data_pegawai.edit', compact('user', 'subjects'));
     }
 
     /**
@@ -138,7 +138,7 @@ class UserController extends Controller
             'password' => $request->password ? Hash::make($request->password) : $user->password,
         ]);
 
-        return redirect()->route('data_guru.index')->with('success', 'Data guru berhasil diperbarui.');
+        return redirect()->route('data_pegawai.index')->with('success', 'Data guru berhasil diperbarui.');
     }
 
     /**
@@ -147,7 +147,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         User::destroy($user->id);
-        return redirect()->route('data_guru.index')->with('success', 'A user has been deleted');
+        return redirect()->route('data_pegawai.index')->with('success', 'A user has been deleted');
     }
 
     public function statistik()
