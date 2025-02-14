@@ -23,11 +23,13 @@
                             </div>
                         </form>
                         <!-- Tombol Tambah yang Lebih Menarik -->
+                        @if (Auth::user()->role === 'Admin')
                         <a href="{{ route('data_guru.create') }}" 
                             class="inline-flex items-center px-4 py-2 bg-white text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-all duration-200 shadow-sm">
                             <i class="fas fa-user-plus mr-2"></i>
                             Tambah Guru
                         </a>
+                        @endif
                     </div>
                 </div>
 
@@ -65,6 +67,7 @@
                                                 title="Lihat Detail">
                                                 <i class="fas fa-eye"></i>
                                             </a>
+                                            @if (Auth::user()->role === 'Admin')
                                             <a href="{{ route('data_guru.edit', $teacher->id) }}" 
                                                 class="p-1.5 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors duration-200 tooltip"
                                                 title="Edit">
@@ -74,11 +77,12 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 <button onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')" 
-                                                    class="p-1.5 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-200 tooltip"
-                                                    title="Hapus">
-                                                    <i class="fas fa-trash"></i>
+                                                class="p-1.5 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-200 tooltip"
+                                                title="Hapus">
+                                                <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
+                                            @endif
                                         </div>
                                     </td>
                                 </tr>

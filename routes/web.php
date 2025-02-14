@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\BirthdayController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ProvinceController;
 
@@ -15,14 +16,16 @@ Route::get('/Beranda', function () {
 Route::get('/GantiData', function () {
     return view('Ganti-Data');
 });
-Route::get('/UlangTahun', function () {
-    return view('Ulang-Tahun');
-});
-
+Route::get('/UlangTahun', [BirthdayController::class, 'birthday'])->name('ulang-tahun');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/ganti-password', function () {
+    return view('ganti_password'); 
+})->name('ganti-password');
+
 
 Route::get('/location', [LocationController::class, 'getProvinces'])->name('location');
 Route::post('/location', [LocationController::class, 'getCities'])->name('get.cities');
