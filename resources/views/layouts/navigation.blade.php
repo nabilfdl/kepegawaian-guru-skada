@@ -18,14 +18,14 @@
                 </div>
                 @if (Auth::user()->role === 'Admin' || Auth::user()->role === 'Operator')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('data_guru.index')" :active="request()->routeIs('data_guru.index')">
-                        {{ __('Data Guru') }}
+                    <x-nav-link :href="route('data_pegawai.index')" :active="request()->routeIs('data_pegawai.index')">
+                        {{ __('Data Pegawai') }}
                     </x-nav-link>
                 </div>
                 @endif
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('statistik_guru')" :active="request()->routeIs('statistik_guru')">
-                        {{ __('Statistik Guru') }}
+                    <x-nav-link :href="route('statistik_pegawai')" :active="request()->routeIs('statistik_pegawai')">
+                        {{ __('Statistik Pegawai') }}
                     </x-nav-link>
                 </div>
                 {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
@@ -42,7 +42,7 @@
                 @endif
                 @if (Auth::user()->role === 'User')
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('edit-data-diri')" :active="request()->routeIs('edit-data-diri')">
+                        <x-nav-link :href="route('edit_data_diri.index')" :active="request()->routeIs('edit_data_diri.index')">
                             {{ __('Edit Data Diri') }}
                         </x-nav-link>
                     </div>

@@ -66,7 +66,7 @@
                             <select name="religion" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" required>
                                 <option value="" >Pilih Agama</option>
                                 <option value="Islam" {{ old('religion') == "Islam" || $user->religion == "Islam" ? 'selected' : '' }}>Islam</option>
-                                <option value="Kristen" {{ old('religion') == "Kristen" || $user->religion == "Kristen" ? 'selected' : '' }}>Kristen</option>
+                                <option value="Kristen" {{ old('religion') == "Protestan" || $user->religion == "Protestab" ? 'selected' : '' }}>Kristen</option>
                                 <option value="Katolik" {{ old('religion') == "Katolik" || $user->religion == "Katolik" ? 'selected' : '' }}>Katolik</option>
                                 <option value="Hindu" {{ old('religion') == "Hindu" || $user->religion == "Hindu" ? 'selected' : '' }}>Hindu</option>
                                 <option value="Buddha" {{ old('religion') == "Buddha" || $user->religion == "Buddha" ? 'selected' : '' }}>Buddha</option>
