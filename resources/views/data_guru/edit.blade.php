@@ -21,7 +21,7 @@
     <div class="py-6">
         <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white shadow-xl sm:rounded-lg p-6">
-                <h3 class="text-lg font-semibold text-gray-800 mb-4 text-center">Edit Guru</h3>
+                <h3 class="text-lg font-semibold text-gray-800 mb-4 text-center">Edit Data Guru</h3>
                 
                 @if ($errors->any())
                     <div class="bg-red-500 text-white p-4 rounded-lg mb-4">
@@ -37,6 +37,7 @@
                     @csrf
                     @method('PUT')
                     <div class="grid grid-cols-2 gap-6">
+                    <div class="bg-gray-100 p-4 rounded-lg">
                         <div>
                             <label class="block text-gray-700">NIP</label>
                             <input type="number" name="nip" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" value="{{ old('nip', $user->nip) }}" required>
@@ -125,6 +126,7 @@
                             <small class="text-gray-500">Kosongkan jika tidak ingin mengubah password</small>
                         </div>
                     </div>
+                </div>
                     
                     <div class="mt-6 flex justify-between">
                         <a href="{{ route('data_guru.index') }}" class="bg-red-800 text-white px-6 py-2 rounded-lg hover:bg-red-900 transition">

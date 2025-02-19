@@ -5,36 +5,38 @@
         </h2>
     </x-slot>
 
-    <div class="py-6">
+        <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            
             <!-- Profil Guru -->
-            <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg flex gap-8 transition-all duration-300 hover:shadow-xl">
-                <div class="w-1/4">
-                    <div class="h-full flex flex-col items-center justify-center p-4">
-                        <!-- Foto Profil 3x4 -->
-                        <div class="w-32 h-40 overflow-hidden mb-3">
-                            @if(Auth::user()->photo)
-                                <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="Foto Profil" class="w-full h-full object-cover">
-                            @else
-                                <div class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-600">
-                                    <svg class="w-16 h-16 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                    </svg>
-                                </div>
-                            @endif
-                        </div>
-                        <!-- NIP di bawah foto -->
-                        <div class="text-center bg-gray-100 dark:bg-gray-700 rounded-lg p-3 w-full">
-                            <div class="flex items-center justify-center space-x-2">
-                                <span class="text-gray-600 dark:text-gray-300 font-medium">NIP:</span>
-                                <span class="text-gray-800 dark:text-gray-200 font-semibold">{{ Auth::user()->nip ?? '-' }}</span>
+            <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg flex flex-col lg:flex-row gap-8 transition-all duration-300 hover:shadow-xl">
+                <div class="w-full lg:w-1/4 flex flex-col items-center lg:items-start justify-center p-4">
+                   
+                <!-- Foto Profil 3x4 -->
+                    <div class="w-32 h-40 mx-auto overflow-hidden mb-3"> @if(Auth::user()->photo)
+                            <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="Foto Profil" class="w-full h-full object-cover">
+                        @else
+                            <div class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-600">
+                                <svg class="w-16 h-16 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
                             </div>
+                        @endif
+                    </div>
+                    
+                    <!-- NIP di bawah foto -->
+                    <div class="text-center mx-auto">
+                        <div class="flex items-center justify-center lg:justify-start space-x-2">
+                            <span class="text-gray-600 dark:text-gray-300 font-medium">NIP:</span>
+                            <span class="text-gray-800 dark:text-gray-200 font-semibold">{{ Auth::user()->nip ?? '-' }}</span>
                         </div>
                     </div>
                 </div>
-                <div class="w-3/4">
-                    <h3 class="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200">Profil Saya</h3>
-                    <div class="grid grid-cols-2 gap-4">
+
+                <!-- profil biodata -->
+                <div class="w-full lg:w-3/4">
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-200 border-b border-gray-300 dark:border-gray-600 pb-2">Profil Saya</h3>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
                         <div class="space-y-3">
                             <p class="flex items-center">
                                 <span class="text-gray-600 dark:text-gray-400 w-40">Nama</span>
@@ -54,7 +56,7 @@
                             <p class="flex items-center">
                                 <span class="text-gray-600 dark:text-gray-400 w-40">Alamat</span>
                                 <span class="text-gray-600 dark:text-gray-400">:</span>
-                                <span class="font-medium text-gray-800 dark:text-gray-200 ml-2">{{ Auth::user()->address }}</span>
+                                <span class="font-medium text-gray-800 dark:text-gray-200 ml-2 break-word">{{ Auth::user()->address }}</span>
                             </p>
                         </div>
                         <div class="space-y-3">
@@ -82,6 +84,7 @@
                     </div>
                 </div>
             </div>
+            <!-- end profil biodata -->
 
             <!-- Statistik Guru -->
             <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -122,13 +125,14 @@
                     </div>
                 </div>
             </div>
+            <!-- end Statistik Guru -->
 
             <!-- Notifikasi Ulang Tahun -->
             <div class="bg-gradient-to-r from-yellow-600 to-yellow-700 p-6 mt-6 rounded-xl shadow-lg">
-                <div class="flex items-center space-x-4">
-                    <div class="flex-shrink-0">
-                        <span class="text-4xl">🎉</span>
-                    </div>
+            <div class="flex items-center space-x-4">
+            <div class="flex-shrink-0 animate-bounce">
+            <span class="text-4xl">🎉</span>
+            </div>
                     <div class="flex-1">
                         <h4 class="text-xl font-bold text-white mb-1">Selamat Ulang Tahun!</h4>
                         <p class="text-white">Selamat ulang tahun kepada Pak Jono yang ke-77 tahun!</p>
@@ -138,21 +142,22 @@
                     </button>
                 </div>
             </div>
+            <!-- end Notifikasi Ulang Tahun -->
 
             <!-- Tabel Data Guru -->
             <div class="mt-6 bg-gray-900 dark:bg-gray-800 p-6 rounded-xl shadow-lg overflow-hidden">
                 <div class="flex justify-between items-center mb-4">
                     <h3 class="text-xl font-bold text-gray-100 dark:text-gray-200">Data Guru Terbaru</h3>
-                    <a href="#" class="text-blue-400 hover:text-blue-300 font-medium">Lihat Semua</a>
+                    <a href="data_guru" class="text-blue-400 hover:text-blue-300 font-semibold">Lihat Semua</a>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full">
                         <thead>
                             <tr class="bg-gray-800 dark:bg-gray-700">
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 dark:text-gray-300 uppercase tracking-wider">Nama</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 dark:text-gray-300 uppercase tracking-wider">Golongan</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 dark:text-gray-300 uppercase tracking-wider">Mata Pelajaran</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 dark:text-gray-300 uppercase tracking-wider">Status</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-300 dark:text-gray-300 uppercase tracking-wider">Nama</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-300 dark:text-gray-300 uppercase tracking-wider">Golongan</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-300 dark:text-gray-300 uppercase tracking-wider">Mata Pelajaran</th>
+                                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-300 dark:text-gray-300 uppercase tracking-wider">Status</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-700 dark:divide-gray-600">
@@ -182,4 +187,5 @@
             </div>
         </div>
     </div>
+    <!-- end table data guru -->
 </x-app-layout>

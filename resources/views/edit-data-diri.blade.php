@@ -7,10 +7,8 @@
 
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white shadow-xl sm:rounded-lg p-6">
-                <h3 class="text-lg font-semibold text-gray-800 mb-4 text-center">Edit Data Diri</h3>
                 
-                <div class="max-w-4xl mx-auto mt-5">
+                <div class="max-w-4xl mx-auto mt-3">
                     <div class="bg-gray-800 p-5 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <div x-data="{ tab: localStorage.getItem('activeTab') || 'edit' }"
                              x-init="$watch('tab', value => localStorage.setItem('activeTab', value))"
@@ -42,7 +40,6 @@
 
                                 <!-- ✨ Form Edit Data -->
                                 <div x-show="tab === 'edit'" class="p-4 bg-gray-100 rounded-lg">
-                                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                                         <form action="/update-data" method="POST" class="space-y-4">
                                             @csrf
                                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
