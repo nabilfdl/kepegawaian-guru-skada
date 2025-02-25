@@ -46,11 +46,6 @@ Route::get('/Beranda', function () {
 });
 
 
-Route::get('/ganti-password', function () {
-    return view('ganti_password'); 
-})->name('ganti-password');
-
-
 Route::get('/location', [LocationController::class, 'getProvinces'])->name('location');
 Route::post('/location', [LocationController::class, 'getCities'])->name('get.cities');
 
