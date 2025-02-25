@@ -11,10 +11,8 @@
                 <!-- Header Section dengan Background -->
                 <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-6">
                     <div class="flex items-center justify-center">
-                        <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-lg">
-                            <svg class="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
+                        <div class="w-24 h-full bg-white rounded-full flex items-center justify-center shadow-lg">
+                            <img src="{{ asset('storage/' . $user->pfp) }}" alt="Foto Profil" class="w-full h-full object-cover">
                         </div>
                     </div>
                     <h3 class="text-2xl font-bold text-white text-center mt-4">{{ $user->name }}</h3>

@@ -27,6 +27,7 @@ return new class extends Migration
             $table->enum('marital_status', ['Belum Kawin', 'Kawin']);
             $table->enum('status', ['Aktif', 'Purna Tugas']);
             $table->enum('role', ['Admin', 'Operator', 'User']);
+            $table->string('pfp')->nullable(); // Add this line for the profile picture field
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

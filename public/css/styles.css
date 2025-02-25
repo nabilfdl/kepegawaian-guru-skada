@@ -1,0 +1,14 @@
+/* Add these styles to your CSS */
+.modal-overlay {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+.img-container {
+    min-height: 400px; /* Ensure container has space */
+}
+
+#modal-image {
+    max-width: 100% !important;
+    height: auto !important;
+    display: block !important;
+}

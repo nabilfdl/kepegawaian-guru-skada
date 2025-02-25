@@ -13,8 +13,9 @@
                     <div class="h-full flex flex-col items-center justify-center p-4">
                         <!-- Foto Profil 3x4 -->
                         <div class="w-32 h-40 overflow-hidden mb-3">
-                            @if(Auth::user()->photo)
-                                <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="Foto Profil" class="w-full h-full object-cover">
+                            @if(Auth::user()->pfp)
+                                <img src="{{ asset('storage/' . Auth::user()->pfp) }}" alt="Foto Profil" class="w-full h-full object-cover">
+                                {{-- <img src="{{ asset('storage/pfp_img/sma.jpg' ) }}" alt="Foto Profil" class="w-full h-full object-cover"> --}}
                             @else
                                 <div class="w-full h-full flex items-center justify-center bg-gray-200 dark:bg-gray-600">
                                     <svg class="w-16 h-16 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">

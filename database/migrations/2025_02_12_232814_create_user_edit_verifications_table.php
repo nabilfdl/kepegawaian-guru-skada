@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('nip');
             $table->string('name');
-            $table->string('email')->unique();
-            $table->string('phone')->unique();
+            $table->string('email');
+            $table->string('phone');
             $table->enum('sex', ['Laki-Laki', 'Perempuan']);
             $table->text('address');
             $table->date('birth_date');
@@ -27,6 +27,7 @@ return new class extends Migration
             $table->enum('marital_status', ['Belum Kawin', 'Kawin']);
             $table->enum('status', ['Aktif', 'Purna Tugas']);
             $table->enum('role', ['Admin', 'Operator', 'User']);
+            $table->string('pfp')->nullable(); // Add this line for the profile picture field
             $table->enum('acceptance_status', ['Diverifikasi', 'Ditolak', 'Dalam Proses']);
             $table->timestamps();
         });

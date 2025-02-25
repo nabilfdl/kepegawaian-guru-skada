@@ -108,7 +108,7 @@
                 <!-- Footer Actions -->
                 <div class="border-t bg-gray-50 px-6 py-3">
                     <div class="flex justify-between items-center">
-                        <a href="{{ route('edit_data_diri.index') }}" class="inline-flex items-center px-4 py-2 {{ 
+                        <a href="{{ route('verifikasi_data') }}" class="inline-flex items-center px-4 py-2 {{ 
                                 $user->acceptance_status == 'Diverifikasi' 
                                     ? 'bg-green-500 hover:bg-green-600' 
                                     : ($user->acceptance_status == 'Dalam Proses' 
@@ -120,6 +120,32 @@
                             </svg>
                             Kembali
                         </a>
+                        <div class="">
+                            @if ($user->acceptance_status == 'Dalam Proses')
+                                <form method="POST" action="{{ route('verifikasi_data.store_denied', $user->id ) }}" class="inline-flex">
+                                    @csrf
+                                    <button onclick="return confirm('Apakah Anda yakin ingin menolak ajuan data ini?')" class="inline-flex items-center px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition duration-150 ease-in-out">
+                                        <!-- X Icon for Tolak -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                        </svg>
+                                        Tolak
+                                    </button>
+                                </form>
+                                <form method="POST" action="{{ route('verifikasi_data.store_accepted', $user->id) }}" class="inline-flex">
+                                    @csrf
+                                    @method('PUT')
+                                    <button onclick="return confirm('Apakah Anda yakin ingin menerima ajuan data ini?')" class="inline-flex items-center px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition duration-150 ease-in-out">
+                                        <!-- Check Icon for Terima -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                        </svg>
+                                        Terima
+                                    </button> 
+                                </form>
+                            @endif
+                            
+                        </div>
                     </div>
                 </div>
             </div>

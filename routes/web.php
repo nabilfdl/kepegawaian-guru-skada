@@ -1,12 +1,17 @@
 <?php
 
-use App\Http\Controllers\BirthdayController;
-use App\Http\Controllers\EditDataDiriController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\BirthdayController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ProvinceController;
+use App\Http\Controllers\ImageUploadController;
+use App\Http\Controllers\EditDataDiriController;
+use App\Http\Controllers\UserEditVerificationController;
+
+Route::post('/upload-cropped-image', [ImageUploadController::class, 'uploadCroppedImage'])->name('upload.cropped.image');
+Route::post('/delete-image', [ImageUploadController::class, 'deleteImage'])->name('delete.image');
 
 Route::middleware('auth')->group(function () {
     Route::get('/', function () {
@@ -29,9 +34,11 @@ Route::middleware('auth')->group(function () {
     ]);
     
     Route::get('/statistik_pegawai', [UserController::class, 'statistik'])->name('statistik_pegawai');
-    Route::get('/verifikasi_data', function () {
-        return view('verifikasi_data');
-    })->name('verifikasi_data');
+    
+    Route::post('/verifikasi_data/{verification}', [UserEditVerificationController::class, 'store_denied'])->name('verifikasi_data.store_denied');
+    Route::put('/verifikasi_data/{verification}', [UserEditVerificationController::class, 'store_accepted'])->name('verifikasi_data.store_accepted');
+    Route::get('/verifikasi_data', [UserEditVerificationController::class, 'index'])->name('verifikasi_data');
+    Route::get('/verifikasi_data/{verification}', [UserEditVerificationController::class, 'show'])->name('verifikasi_data.show');
 });
 
 

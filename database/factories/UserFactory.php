@@ -39,6 +39,7 @@ class UserFactory extends Factory
             'marital_status' => $this->faker->randomElement(['Belum Kawin', 'Kawin']),
             'status' => $this->faker->randomElement(['Aktif', 'Purna Tugas']),
             'role' => $this->faker->randomElement(['Admin', 'Operator', 'User']),
+            'pfp' => 'pfp_img/sma.jpg', // Default profile picture
             'email_verified_at' => now(),
             'password' => Hash::make('password'), // Default password
             'remember_token' => Str::random(10),

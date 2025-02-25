@@ -41,6 +41,12 @@ class EditDataDiriController extends Controller
             'status' => 'required|string',
         ]);
 
+        if ($request->pfp) {
+            $pfpPath = 'pfp_img/' . $request->pfp;    
+        } else {
+            $pfpPath = null;
+        }
+
         UserEditVerification::create([
             'nip' => Auth::user()->nip,
             'name' => $request->name,
@@ -57,9 +63,10 @@ class EditDataDiriController extends Controller
             'acceptance_status' => 'Dalam Proses',
             'created_at' => now(),
             'updated_at' => now(),
+            'pfp' => $pfpPath,
         ]);
 
-        return redirect()->route('dashboard')->with('success', 'Data has been submitted for verification.');
+        return redirect()->route('edit_data_diri.index')->with('success', 'Data has been submitted for verification.');
     }
 
     public function show(UserEditVerification $verification)

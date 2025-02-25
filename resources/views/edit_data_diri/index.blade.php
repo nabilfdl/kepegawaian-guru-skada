@@ -12,7 +12,7 @@
                 
                 <div class="max-w-4xl mx-auto mt-5">
                     <div class="bg-gray-800 p-5 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-                        <div x-data="{ tab: localStorage.getItem('activeTab') || 'edit' }"
+                        <div x-data="{ tab: localStorage.getItem('activeTab') || 'edit', imageUrl: '' }"
                              x-init="$watch('tab', value => localStorage.setItem('activeTab', value))"
                              class="p-6 bg-white rounded-lg shadow-lg">
 
@@ -41,7 +41,7 @@
                             <div>
 
                                 <!-- ✨ Form Edit Data -->
-                                <div x-show="tab === 'edit'" class="p-4 bg-gray-100 rounded-lg">
+                                <div x-init="init()" x-show="tab === 'edit'" class="p-4 bg-gray-100 rounded-lg">
                                     <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
                                         
                                         @if ($pending_edit_data->isNotEmpty())
@@ -66,9 +66,29 @@
                                                     </ul>
                                                 </div>
                                             @endif
-                                            <form action="{{ route('edit_data_diri.store_edit') }}" method="POST">
+                                            <form id="updateForm" action="{{ route('edit_data_diri.store_edit') }}" method="POST" enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="grid grid-cols-2 gap-6">
+                                                    <div class="mb-6">
+                                                        <label for="imageInput" class="block text-gray-700 mb-2">Upload Photo:</label>
+                                                        <!-- File input is only for selecting a new image -->
+                                                        <input type="file" id="imageInput" accept="image/*"
+                                                            class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                                                        <!-- Hidden input to store the cropped image filename -->
+                                                        <input id="croppedInput" type="hidden" name="pfp" value="{{ old('pfp', Auth::user()->pfp) }}">
+                                                        
+                                                        <div class="mt-4">
+                                                            <!-- Preview image for cropping -->
+                                                            <img id="preview" alt="Image Preview" class="w-32 h-32 object-cover border hidden">
+                                                            <br><br>
+                                                            <button type="button" id="cropButton" style="display:none;">Crop Image</button>
+                                                        </div>
+                                                        
+                                                        <div id="croppedDiv" class="mt-4 result {{ Auth::user()->pfp ? '' : 'hidden' }}">
+                                                            <h3>Cropped Image:</h3>
+                                                            <img src="{{ asset('storage/'. Auth::user()->pfp) }}" id="croppedImage" alt="Cropped Image" class="w-36 h-48 object-cover border">
+                                                        </div>
+                                                    </div>
                                                     <div>
                                                         <label class="block text-gray-700">Nama Lengkap</label>
                                                         <input type="text" name="name" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" value="{{ old('name', Auth::user()->name) }}" required>
@@ -138,6 +158,17 @@
                                                             <option value="Purna Tugas" {{ old('status') == "Purna Tugas" || Auth::user()->status == "Purna Tugas" ? 'selected' : '' }}>Purna Tugas</option>
                                                         </select>
                                                     </div>
+                                                    {{-- <div>
+                                                        <label for="image-input" class="block text-gray-700 mb-2">Upload Photo:</label>
+                                                        <input type="file" id="image-input" name="pfp" accept="image/*" 
+                                                                class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" 
+                                                                @change="previewImage($event)">
+
+                                                        <!-- Preview Image Outside Modal -->
+                                                        <div class="mt-4">
+                                                            <img id="preview-image" :src="imageUrl" alt="Image Preview" class="w-32 h-32 object-cover rounded-lg border">
+                                                        </div>
+                                                    </div> --}}
                                                 </div>
                                                 
                                                 <div class="mt-6 flex justify-between">
@@ -151,6 +182,240 @@
                                             </form>
                                         @endif
                                     </div>
+
+                                    <!-- Modal for cropping -->
+                                    {{-- <div x-show="open" class="fixed inset-0 flex items-center justify-center z-50" 
+                                    style="background-color: rgba(0, 0, 0, 0.8)" x-cloak>
+                                        <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg w-full mx-4">
+                                            <div class="bg-gray-800 p-4 flex justify-between items-center">
+                                                <h2 class="text-lg font-medium text-white">Crop Image</h2>
+                                                <button @click="open = false" class="text-white hover:text-gray-300">&times;</button>
+                                            </div>
+                                            <div class="p-4" style="min-height: 500px;">
+                                                <div class="img-container">
+                                                    <img id="modal-image" :src="imageUrl" alt="To Crop" 
+                                                            class="w-full max-h-[70vh] object-contain">
+                                                </div>
+                                            </div>
+                                            <div class="bg-gray-100 p-4 flex justify-end">
+                                                <button @click="open = false" class="bg-gray-500 text-white px-4 py-2 rounded-lg mr-2">Cancel</button>
+                                                <button @click="cropImage" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Crop</button>
+                                            </div>
+                                        </div>
+                                    </div> --}}
+
+                                    {{-- <div x-show="open" class="fixed inset-0 flex items-center justify-center z-50" style="display: none;">
+                                        <div class="fixed inset-0 modal-overlay"></div>
+                                        <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full z-50">
+                                        <div class="bg-gray-800 p-4 flex justify-between items-center">
+                                            <h2 class="text-lg font-medium text-white">Crop Image</h2>
+                                            <button @click="open = false" class="text-white hover:text-gray-300">&times;</button>
+                                        </div>
+                                        <div class="p-4">
+                                            <div class="img-container">
+                                            <img id="modal-image" :src="imageUrl" alt="To Crop" class="w-full">
+                                            </div>
+                                        </div>
+                                        <div class="bg-gray-100 p-4 flex justify-end">
+                                            <button @click="open = false" class="bg-gray-500 text-white px-4 py-2 rounded-lg mr-2">Cancel</button>
+                                            <button @click="cropImage" class="bg-blue-500 text-white px-4 py-2 rounded-lg">Crop</button>
+                                        </div>
+                                        </div>
+                                    </div> --}}
+
+                                    {{-- <script>
+                                        let cropper;
+                                        let image = document.getElementById('preview');
+                                
+                                        // Image Preview and Cropper Initialization
+                                        $("#imageInput").on("change", function(event) {
+                                            let file = event.target.files[0];
+                                            if (!file) return;
+                                
+                                            let reader = new FileReader();
+                                            reader.onload = function(e) {
+                                                $("#preview").attr("src", e.target.result).show();
+                                
+                                                // Destroy old cropper instance if exists
+                                                if (cropper) {
+                                                    cropper.destroy();
+                                                }
+                                
+                                                // Initialize Cropper.js
+                                                cropper = new Cropper(image, {
+                                                    aspectRatio: 3/4,
+                                                    viewMode: 2
+                                                });
+                                
+                                                $("#cropButton").show(); // Show Crop button
+                                            };
+                                            reader.readAsDataURL(file);
+                                        });
+                                
+                                        // Cropping the Image
+                                        $("#cropButton").on("click", function() {
+                                            let croppedCanvas = cropper.getCroppedCanvas();
+                                            let croppedImage = croppedCanvas.toDataURL();
+                                
+                                            $("#croppedImage").attr("src", croppedImage);
+                                            $("#cropped-result").show();
+                                        });
+                                    </script> --}}
+
+                                <script>
+                                    let cropper;
+                                    let image = document.getElementById('preview');
+                                    let uploadedImageName = null; // Store image name for deletion
+
+                                    // Image Preview and Cropper Initialization
+                                    $("#imageInput").on("change", function(event) {
+                                        let file = event.target.files[0];
+                                        if (!file) return;
+                                        
+                                        // If there is an already uploaded cropped image and it differs from the original,
+                                        // delete the old file to avoid storage buildup.
+                                        if (uploadedImageName) {
+                                            $.ajax({
+                                                url: "{{ route('delete.image') }}",
+                                                type: "POST",
+                                                data: { image_name: uploadedImageName },
+                                                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                                                success: function(response) {
+                                                    console.log("Old cropped image deleted.");
+                                                    // Reset the hidden input and local variable
+                                                    $("#croppedInput").val("");
+                                                    uploadedImageName = "";
+                                                },
+                                                error: function(err) {
+                                                    console.error("Error deleting old cropped image:", err);
+                                                }
+                                            });
+                                        }
+                                        
+                                        let reader = new FileReader();
+                                        reader.onload = function(e) {
+                                            $("#preview").attr("src", e.target.result).show();
+
+                                            // Destroy old cropper instance if exists
+                                            if (cropper) {
+                                                cropper.destroy();
+                                            }
+                                            
+                                            // Initialize Cropper.js
+                                            cropper = new Cropper(image, {
+                                                aspectRatio: 3/4,
+                                                viewMode: 2
+                                            });
+                                            
+                                            $("#croppedDiv").show(); // Show Cropped Image div
+                                            $("#cropButton").show(); // Show Crop button
+                                        };
+                                        
+                                        reader.readAsDataURL(file);
+                                    });
+
+                                    $("#cropButton").on("click", function() {
+                                        console.log('Cropping image...');
+                                        if (!cropper) return;
+                                        
+                                        // If there is an already uploaded cropped image and it differs from the original,
+                                        // delete the old file to avoid storage buildup.
+                                        if (uploadedImageName) {
+                                            $.ajax({
+                                                url: "{{ route('delete.image') }}",
+                                                type: "POST",
+                                                data: { image_name: uploadedImageName },
+                                                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                                                success: function(response) {
+                                                    console.log("Old cropped image deleted.");
+                                                    // Reset the hidden input and local variable
+                                                    $("#croppedInput").val("");
+                                                    uploadedImageName = "";
+                                                },
+                                                error: function(err) {
+                                                    console.error("Error deleting old cropped image:", err);
+                                                }
+                                            });
+                                        }
+
+                                        cropper.getCroppedCanvas({
+                                            width: 300,
+                                            height: 400
+                                        }).toBlob(function(blob) {
+                                                let formData = new FormData();
+                                                formData.append("pfp", blob, "cropped-image.png");
+                                                console.log("File uploaded:", formData.get("pfp"));
+
+                                                $.ajax({
+                                                    url: "{{ route('upload.cropped.image') }}",  // <-- This should match the Laravel route
+                                                    type: "POST",
+                                                    data: formData,
+                                                    processData: false,
+                                                    contentType: false,
+                                                    headers: {
+                                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // Add CSRF token
+                                                    },
+                                                    success: function(response) {
+                                                        if (response.success) {
+                                                            $("#croppedImage").attr("src", response.image);
+                                                            uploadedImageName = response.image_name;
+                                                            $("#croppedInput").val(uploadedImageName);
+                                                            cropper.destroy();
+                                                            $("#cropButton").hide();
+                                                            $("#preview").hide();
+                                                        }
+                                                    },
+                                                    error: function(err) {
+                                                        console.error("Upload failed!", err);
+                                                    }
+                                                });
+                                        }, "image/png");
+                                    });
+
+                                    $("#cancelButton").on("click", function() {
+                                        if (!uploadedImageName) return;
+
+                                        $.ajax({
+                                            url: "{{ route('delete.image') }}",
+                                            type: "POST",
+                                            data: { image_name: uploadedImageName },
+                                            headers: {
+                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                            },
+                                            success: function(response) {
+                                                if (response.success) {
+                                                    console.log("Image deleted successfully");
+                                                    $("#preview").hide();
+                                                    uploadedImageName = null;
+                                                }
+                                            },
+                                            error: function(err) {
+                                                console.error("Failed to delete image", err);
+                                            }
+                                        });
+                                    });
+
+
+                                    $("#updateForm").on("submit", function() {
+                                        window.formSubmitting = true;
+                                    });
+
+
+                                    // Delete Image When Page is Refreshed
+                                    $(window).on("beforeunload", function() {
+                                        if (uploadedImageName && !window.formSubmitting) {
+                                            console.log("Deleting image on page unload:", uploadedImageName);
+                                            fetch("{{ route('delete.image') }}", {
+                                                method: "POST",
+                                                headers: {
+                                                    "Content-Type": "application/json",
+                                                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                                                },
+                                                body: JSON.stringify({ image_name: uploadedImageName })
+                                            }).catch(err => console.error("Failed to delete image on unload:", err));
+                                        }
+                                    });
+                                </script>
                                 </div>
 
                                 <!-- ✨ Konten Dalam Proses -->

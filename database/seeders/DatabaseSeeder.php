@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             'marital_status' => 'Kawin',
             'status' => 'Aktif',
             'role' => 'Admin',
+            'pfp' => 'pfp_img/sma.jpg',
             'email_verified_at' => now(),
             'password' => Hash::make('password'), // Replace 'password' with a secure default
             'remember_token' => Str::random(10),

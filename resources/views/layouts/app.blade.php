@@ -11,7 +11,25 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+        <!-- Include Cropper.js -->
+        <link  href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+
+        <!-- Include custom styles -->
+        <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+        <style>
+            #preview {
+                max-width: 100%;
+                max-height: 400px;
+            }
+            #cropped-result {
+                margin-top: 20px;
+                display: none;
+            }
+        </style>
+
         <!-- Scripts -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased h-screen bg-gray-100 dark:bg-gray-900">

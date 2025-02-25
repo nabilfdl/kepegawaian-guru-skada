@@ -33,10 +33,31 @@
                     </div>
                 @endif
 
-                <form action="{{ route('data_guru.update', $user->id) }}" method="POST">
+                <form id="updateForm" action="{{ route('data_pegawai.update', $user->id) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="grid grid-cols-2 gap-6">
+                        <!-- Image Upload & Crop Section -->
+                        <div class="mb-6">
+                            <label for="imageInput" class="block text-gray-700 mb-2">Upload Photo:</label>
+                            <!-- File input is only for selecting a new image -->
+                            <input type="file" id="imageInput" accept="image/*"
+                                class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <!-- Hidden input to store the cropped image filename -->
+                            <input id="croppedInput" type="hidden" name="pfp" value="{{ old('pfp', $user->pfp) }}">
+                            
+                            <div class="mt-4">
+                                <!-- Preview image for cropping -->
+                                <img id="preview" alt="Image Preview" class="w-32 h-32 object-cover border hidden">
+                                <br><br>
+                                <button type="button" id="cropButton" style="display:none;">Crop Image</button>
+                            </div>
+                            
+                            <div id="croppedDiv" class="mt-4 result {{ $user->pfp ? '' : 'hidden' }}">
+                                <h3>Cropped Image:</h3>
+                                <img src="{{ asset('storage/'.$user->pfp) }}" id="croppedImage" alt="Cropped Image" class="w-36 h-48 object-cover border">
+                            </div>
+                        </div>
                         <div>
                             <label class="block text-gray-700">NIP</label>
                             <input type="number" name="nip" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" value="{{ old('nip', $user->nip) }}" required>
@@ -127,7 +148,7 @@
                     </div>
                     
                     <div class="mt-6 flex justify-between">
-                        <a href="{{ route('data_guru.index') }}" class="bg-red-800 text-white px-6 py-2 rounded-lg hover:bg-red-900 transition">
+                        <a href="{{ route('data_pegawai.index') }}" class="bg-red-800 text-white px-6 py-2 rounded-lg hover:bg-red-900 transition">
                             Cancel
                         </a>
                         <button type="submit" class="bg-yellow-500 text-white px-6 py-2 rounded-lg hover:bg-gray-700 transition">
@@ -138,4 +159,148 @@
             </div>
         </div>
     </div>
+    <script>
+        let cropper;
+        let image = document.getElementById('preview');
+        let uploadedImageName = $("#croppedInput").val(); // Initially set to current user's image
+    
+        // When a new file is selected
+        $("#imageInput").on("change", function(event) {
+            let file = event.target.files[0];
+            if (!file) return;
+
+            // If there is an already uploaded cropped image and it differs from the original,
+            // delete the old file to avoid storage buildup.
+            if (uploadedImageName && uploadedImageName !== "{{ $user->pfp }}") {
+                $.ajax({
+                    url: "{{ route('delete.image') }}",
+                    type: "POST",
+                    data: { image_name: uploadedImageName },
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                    success: function(response) {
+                        console.log("Old cropped image deleted.");
+                        // Reset the hidden input and local variable
+                        $("#croppedInput").val("");
+                        uploadedImageName = "";
+                    },
+                    error: function(err) {
+                        console.error("Error deleting old cropped image:", err);
+                    }
+                });
+            }
+
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                $("#preview").attr("src", e.target.result).show();
+                if (cropper) {
+                    cropper.destroy();
+                }
+                cropper = new Cropper(image, {
+                    aspectRatio: 3 / 4,
+                    viewMode: 2
+                });
+                $("#cropButton").show();
+            };
+            reader.readAsDataURL(file);
+        });
+    
+        // Crop image when Crop button is clicked
+        $("#cropButton").on("click", function() {
+            if (!cropper) return;
+            // If there is an already uploaded cropped image and it differs from the original,
+            // delete the old file to avoid storage buildup.
+            if (uploadedImageName && uploadedImageName !== "{{ $user->pfp }}") {
+                $.ajax({
+                    url: "{{ route('delete.image') }}",
+                    type: "POST",
+                    data: { image_name: uploadedImageName },
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                    success: function(response) {
+                        console.log("Old cropped image deleted.");
+                        // Reset the hidden input and local variable
+                        $("#croppedInput").val("");
+                        uploadedImageName = "";
+                    },
+                    error: function(err) {
+                        console.error("Error deleting old cropped image:", err);
+                    }
+                });
+            }
+            cropper.getCroppedCanvas({
+                width: 300,  // Desired width
+                height: 400  // Desired height (to maintain 3:4 ratio)
+            }).toBlob(function(blob) {
+                let formData = new FormData();
+                // Append the cropped image as a file to FormData
+                formData.append("pfp", blob, "cropped-image.png");
+                $.ajax({
+                    url: "{{ route('upload.cropped.image') }}",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            // Update the preview in the result section
+                            $("#croppedImage").attr("src", response.image).show();
+                            // Update the hidden input with the new file name
+                            $("#croppedInput").val(response.image_name);
+                            uploadedImageName = response.image_name;
+                        }
+                    },
+                    error: function(err) {
+                        console.error("Upload failed!", err);
+                    }
+                });
+            }, "image/png");
+        });
+
+        $("#cancelButton").on("click", function() {
+            if (!uploadedImageName) return;
+
+            $.ajax({
+                url: "{{ route('delete.image') }}",
+                type: "POST",
+                data: { image_name: uploadedImageName },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    if (response.success) {
+                        console.log("Image deleted successfully");
+                        $("#preview").hide();
+                        uploadedImageName = null;
+                    }
+                },
+                error: function(err) {
+                    console.error("Failed to delete image", err);
+                }
+            });
+        });
+
+
+        $("#updateForm").on("submit", function() {
+            window.formSubmitting = true;
+        });
+
+
+        // Delete Image When Page is Refreshed
+        $(window).on("beforeunload", function() {
+            if (uploadedImageName && !window.formSubmitting) {
+                console.log("Deleting image on page unload:", uploadedImageName);
+                fetch("{{ route('delete.image') }}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                    },
+                    body: JSON.stringify({ image_name: uploadedImageName })
+                }).catch(err => console.error("Failed to delete image on unload:", err));
+            }
+        });
+
+      </script>
 </x-app-layout>

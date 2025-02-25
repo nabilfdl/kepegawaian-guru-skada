@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -45,6 +46,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        
         $request->validate([
             'nip' => 'required|numeric|digits_between:5,20|unique:users,nip',
             'name' => 'required|string|max:255',
@@ -59,7 +61,16 @@ class UserController extends Controller
             'address' => 'required|string|max:500',
             'subject_id' => 'required',
             'status' => 'required|in:Aktif,Purna Tugas',
+            'pfp' => 'string',
         ]);
+
+
+        if ($request->pfp) {
+            $pfpPath = 'pfp_img/' . $request->pfp;    
+        } else {
+            $pfpPath = null;
+        }
+
 
         $user = User::create([
             'nip' => $request->nip,
@@ -77,6 +88,7 @@ class UserController extends Controller
             'status' => $request->status,
             'password' => Hash::make($request->password), // Hash the password before storing
             'email_verified_at' => now(), // Automatically verify email
+            'pfp' => $pfpPath,
         ]);
     
         return redirect()->route('data_pegawai.index')->with('success', 'Data guru berhasil ditambahkan.');
@@ -118,7 +130,15 @@ class UserController extends Controller
             'address' => 'required|string|max:500',
             'subject_id' => 'required',
             'status' => 'required|in:Aktif,Purna Tugas',
+            'pfp' => 'string',
+
         ]);
+
+        if ($request->pfp) {
+            $pfpPath = 'pfp_img/' . $request->pfp;    
+        } else {
+            $pfpPath = null;
+        }
 
         $user->update([
             'nip' => $request->nip,
@@ -136,6 +156,7 @@ class UserController extends Controller
             'status' => $request->status,
             // Only update the password if a new one is provided
             'password' => $request->password ? Hash::make($request->password) : $user->password,
+            'pfp' => $pfpPath,
         ]);
 
         return redirect()->route('data_pegawai.index')->with('success', 'Data guru berhasil diperbarui.');
@@ -146,7 +167,18 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        User::destroy($user->id);
+        // Assuming $user->pfp holds only the filename, e.g. "1739885606.png"
+        // $filePath = 'pfp_img/' . $user->pfp;
+        // dd($filePath);
+        
+        // Check if the file exists in the public disk and delete it
+        if ($user->pfp && Storage::disk('public')->exists($user->pfp)) {
+            Storage::disk('public')->delete($user->pfp);
+        }
+            
+        // Delete the user record
+        $user->delete();
+        
         return redirect()->route('data_pegawai.index')->with('success', 'A user has been deleted');
     }
 
