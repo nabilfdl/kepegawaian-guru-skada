@@ -47,11 +47,10 @@
         <p id="generalError" class="text-red-500 text-xs mt-1 hidden text-center">Password yang dimasukkan salah!</p>
 
         <!-- Tombol Konfirmasi -->
-        <div class="flex justify-center mt-4">
-            <button type="submit" 
-                class="bg-gray-500 text-black font-semibold py-2 px-4 rounded-md hover:bg-gray-700 transition-colors duration-500 text-sm">
-                Konfirmasi
-            </button>
+        <div class="flex justify-end mt-4">
+         <button type="submit" class="border border-gray-400 text-black font-semibold py-2 px-6 rounded-md hover:bg-purple-400 hover:text-black hover:border-gray-900 transition-colors duration-500 text-sm">
+            Konfirmasi
+         </button>
         </div>
     </form>
 </div>

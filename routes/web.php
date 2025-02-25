@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BirthdayController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ProvinceController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\EditDataDiriController;
 use App\Http\Controllers\UserEditVerificationController;
@@ -14,9 +15,7 @@ Route::post('/upload-cropped-image', [ImageUploadController::class, 'uploadCropp
 Route::post('/delete-image', [ImageUploadController::class, 'deleteImage'])->name('delete.image');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/ulang-tahun', [BirthdayController::class, 'birthday'])->name('ulang-tahun');
     

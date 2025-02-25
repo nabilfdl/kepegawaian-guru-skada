@@ -9,7 +9,7 @@
         <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white shadow-xl sm:rounded-lg overflow-hidden">
                 <!-- Header Section dengan Background -->
-                <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-6">
+                <div class="bg-gradient-to-r from-gray-500 to-gray-800 p-6">
                     <div class="flex items-center justify-center">
                         <div class="w-24 h-full bg-white rounded-full flex items-center justify-center shadow-lg">
                             <img src="{{ asset('storage/' . $user->pfp) }}" alt="Foto Profil" class="w-full h-full object-cover">
@@ -27,12 +27,12 @@
                             <h4 class="text-lg font-semibold text-blue-600 mb-4">Informasi Pribadi</h4>
                             <div class="space-y-3">
                                 <div class="flex items-center">
-                                    <span class="text-gray-600 w-32">NIP</span>
-                                    <span class="font-medium">{{ $user->nip }}</span>
+                                    <span class="text-gray-700 w-32">NIP</span>
+                                    <span class="font-semibold text-gray-800">{{ $user->nip }}</span>
                                 </div>
                                 <div class="flex items-center">
-                                    <span class="text-gray-600 w-32">Email</span>
-                                    <span class="font-medium">{{ $user->email }}</span>
+                                    <span class="text-gray-700 w-32">Email</span>
+                                    <span class="font-semibold text-gray-800">{{ $user->email }}</span>
                                 </div>
                                 <div class="flex items-center">
                                     <span class="text-gray-600 w-32">Nomor Telepon</span>
@@ -58,20 +58,20 @@
                                     <span class="font-medium">{{ $user->marital_status }}</span>
                                 </div>
                                 <div class="flex items-center">
-                                    <span class="text-gray-600 w-32">Status</span>
-                                    <span class="font-medium">{{ $user->status }}</span>
+                                    <span class="text-gray-700 w-32">Status</span>
+                                    <span class="font-semibold text-gray-800">{{ $user->status }}</span>
                                 </div>
                                 <div class="flex items-center">
-                                    <span class="text-gray-600 w-32">Level User</span>
-                                    <span class="font-medium">{{ $user->role }}</span>
+                                    <span class="text-gray-700 w-32">Golongan</span>
+                                    <span class="font-semibold text-gray-800">{{ $user->role }}</span>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Address Card -->
-                        <div class="bg-gray-50 p-4 rounded-lg md:col-span-2">
-                            <h4 class="text-lg font-semibold text-blue-600 mb-4">Alamat</h4>
-                            <p class="text-gray-700">{{ $user->address }}</p>
+                        <div class="bg-gray-100 p-4 rounded-lg md:col-span-2">
+                            <h4 class="text-lg font-semibold text-gray-800 mb-4">Alamat</h4>
+                            <p class="font-semibold text-gray-700">{{ $user->address }}</p>
                         </div>
                     </div>
                 </div>

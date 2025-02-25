@@ -10,7 +10,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
                 <!-- Card Header dengan Background -->
-                <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-4 text-white">
+                <div class="bg-gradient-to-r from-gray-500 to-gray-700 p-4 text-white">
                     <div class="flex justify-between items-center">
                         <!-- Search Bar yang Lebih Menarik -->
                         <form action="{{ route('data_pegawai.index') }}" method="GET" class="flex items-center">
@@ -55,7 +55,7 @@
                                     <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-200">{{ $teacher->position }}</td>
                                     <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-200">{{ $teacher->subject->subject_name }}</td>
                                     <td class="px-4 py-3">
-                                        <span class="px-2 py-1 text-xs rounded-full {{ $teacher->status === 'Aktif' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600' }}">
+                                        <span class="px-2 py-1 text-xs rounded-full {{ $teacher->status === 'Aktif' ? 'bg-green-100 text-green-600' : 'bg-yellow-100 text-yellow-900' }}">
                                             {{ $teacher->status }}
                                         </span>
                                     </td>
