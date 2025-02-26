@@ -13,7 +13,7 @@
                 <div class="bg-gradient-to-r from-gray-500 to-gray-700 p-4 text-white">
                     <div class="flex justify-between items-center">
                         <!-- Search Bar yang Lebih Menarik -->
-                        <form action="{{ route('data_guru.index') }}" method="GET" class="flex items-center">
+                        <form action="{{ route('data_pegawai.index') }}" method="GET" class="flex items-center">
                             <div class="relative">
                                 <input type="text" name="search" placeholder="Cari guru..." value="{{ request('search') }}" 
                                     class="w-64 pl-10 pr-4 py-2 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400">
@@ -24,8 +24,8 @@
                         </form>
                         <!-- Tombol Tambah yang Lebih Menarik -->
                         @if (Auth::user()->role === 'Admin')
-                        <a href="{{ route('data_guru.create') }}" 
-                            class="inline-flex items-center px-4 py-2 bg-white text-gray-600 font-semibold rounded-lg hover:bg-blue-50 transition-all duration-200 shadow-sm">
+                        <a href="{{ route('data_pegawai.create') }}" 
+                            class="inline-flex items-center px-4 py-2 bg-white text-blue-600 font-semibold rounded-lg hover:bg-blue-50 transition-all duration-200 shadow-sm">
                             <i class="fas fa-user-plus mr-2"></i>
                             Tambah Guru
                         </a>
@@ -62,18 +62,18 @@
                                     <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-200">{{ $teacher->role }}</td>
                                     <td class="px-4 py-3">
                                         <div class="flex justify-center space-x-2">
-                                            <a href="{{ route('data_guru.show', $teacher->id) }}" 
+                                            <a href="{{ route('data_pegawai.show', $teacher->id) }}" 
                                                 class="p-1.5 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition-colors duration-200 tooltip"
                                                 title="Lihat Detail">
                                                 <i class="fas fa-eye"></i>
                                             </a>
                                             @if (Auth::user()->role === 'Admin')
-                                            <a href="{{ route('data_guru.edit', $teacher->id) }}" 
+                                            <a href="{{ route('data_pegawai.edit', $teacher->id) }}" 
                                                 class="p-1.5 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors duration-200 tooltip"
                                                 title="Edit">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <form method="POST" action="{{ route('data_guru.destroy', $teacher->id) }}" class="inline">
+                                            <form method="POST" action="{{ route('data_pegawai.destroy', $teacher->id) }}" class="inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')" 

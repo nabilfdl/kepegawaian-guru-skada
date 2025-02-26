@@ -1,87 +1,79 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Verifikasi') }}
-        </h2>
-    </x-slot>
-    <div class="py-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="overflow-hidden shadow-xl sm:rounded-lg">
-                <!-- Your content goes here -->
-                <main class="flex justify-center mt-10">
-                    <div class="max-w-4xl w-full bg-white text-black p-6 rounded-lg shadow-lg">
-                      <!-- Navigasi -->
-                      <div class="flex justify-center space-x-3 mb-6">
-                        <a href="/Ganti-Data" class="bg-blue-500 text-white font-semibold py-2 px-6 rounded-md hover:bg-blue-600 text-sm">Edit</a>
-                        <a href="/dalam-proses" class="bg-yellow-500 text-black font-semibold py-2 px-6 rounded-md hover:bg-yellow-600 text-sm">Dalam Proses</a>
-                        <a href="/tanggapan" class="bg-green-500 text-white font-semibold py-2 px-6 rounded-md hover:bg-green-600 text-sm">Tanggapan</a>
-                      </div>
-                  
-                      <!-- Form -->
-                      <form action="/update-data" method="POST" class="space-y-4">
-                        @csrf
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                          <!-- Nama -->
-                          <div>
-                            <label for="nama" class="font-semibold text-sm">Nama</label>
-                            <input type="text" id="nama" name="nama" class="w-full border bg-gray-200 text-black p-2 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                          </div>
-                          <!-- Tempat/Tanggal Lahir -->
-                          <div>
-                            <label for="tanggal_lahir" class="font-semibold text-sm">Tempat/Tanggal Lahir</label>
-                            <input type="date" id="tanggal_lahir" name="tanggal_lahir" class="w-full border bg-gray-200 text-black p-2 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                          </div>
-                          <!-- Jenis Kelamin -->
-                          <div>
-                            <label for="jenis_kelamin" class="font-semibold text-sm">Jenis Kelamin</label>
-                            <select id="jenis_kelamin" name="jenis_kelamin" class="w-full border bg-gray-200 text-black p-2 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                              <option value="Laki-laki">Laki-laki</option>
-                              <option value="Perempuan">Perempuan</option>
-                            </select>
-                          </div>
-                          <!-- Agama -->
-                          <div>
-                            <label for="agama" class="font-semibold text-sm">Agama</label>
-                            <input type="text" id="agama" name="agama" class="w-full border bg-gray-200 text-black p-2 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                          </div>
-                          <!-- Alamat -->
-                          <div class="sm:col-span-2">
-                            <label for="alamat" class="font-semibold text-sm">Alamat</label>
-                            <input type="text" id="alamat" name="alamat" class="w-full border bg-gray-200 text-black p-2 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                          </div>
-                          <!-- Golongan -->
-                          <div>
-                            <label for="golongan" class="font-semibold text-sm">Golongan</label>
-                            <input type="text" id="golongan" name="golongan" class="w-full border bg-gray-200 text-black p-2 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                          </div>
-                          <!-- Status Perkawinan -->
-                          <div>
-                            <label for="status_perkawinan" class="font-semibold text-sm">Status Perkawinan</label>
-                            <input type="text" id="status_perkawinan" name="status_perkawinan" class="w-full border bg-gray-200 text-black p-2 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                          </div>
-                          <!-- Mata Pelajaran -->
-                          <div>
-                            <label for="mata_pelajaran" class="font-semibold text-sm">Mata Pelajaran</label>
-                            <input type="text" id="mata_pelajaran" name="mata_pelajaran" class="w-full border bg-gray-200 text-black p-2 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                          </div>
-                          <!-- Status -->
-                          <div>
-                            <label for="status" class="font-semibold text-sm">Status</label>
-                            <input type="text" id="status" name="status" class="w-full border bg-gray-200 text-black p-2 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                          </div>
-                        </div>
-                  
-                        <!-- Submit Button -->
-                        <div class="flex justify-end mt-4">
-                          <button type="submit" class="bg-purple-500 text-white font-semibold py-2 px-6 rounded-md hover:bg-purple-600 transition-colors duration-300 text-sm">
-                            Simpan Perubahan
-                          </button>
-                        </div>
-                      </form>
-                    </div>
-                  </main>
-                  
+  <x-slot name="header">
+    <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+      {{ __('Verifikasi') }}
+    </h2>
+  </x-slot>
+
+  <div class="py-6">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div class="overflow-hidden shadow-xl sm:rounded-lg">
+        <main class="flex justify-center mt-10">
+          <div class="max-w-4xl w-full bg-white text-black p-6 rounded-lg shadow-lg">
+            
+            <!-- Navigasi -->
+            <div class="flex justify-start space-x-3 mb-6">
+              <button class="tab-link bg-yellow-500 text-black font-semibold py-2 px-6 rounded-md text-sm focus:ring focus:ring-yellow-300 active:bg-yellow-600" data-tab="proses">
+                Dalam Proses
+              </button>
+              <button class="tab-link bg-yellow-500 text-black font-semibold py-2 px-6 rounded-md text-sm focus:ring focus:ring-yellow-300 active:bg-yellow-600" data-tab="notif">
+                Notif
+              </button>
+              
             </div>
-        </div>
+
+            <!-- Konten Dalam Proses -->
+            <div id="proses" class="tab-content">
+              <div class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Muhammad Nabil</h5>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Request untuk mengubah data lahir</p>
+                <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800">
+                  Setujui
+                </a>
+              </div>
+            </div>
+
+            <!-- Konten Notifikasi -->
+            <div id="notif" class="tab-content hidden">
+              <div class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Retrieved</h5>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Muhammad Nabil telah terkonfirmasi perubahaan data terbaru</p>
+              </div>
+
+                <div class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 mt-4">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Rejected</h5>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Penolakan perubahan data Deon </p>
+              </div>
+            </div>
+
+          </div>
+        </main>
+      </div>
     </div>
+  </div>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+  const tabs = document.querySelectorAll(".tab-link");
+  const contents = document.querySelectorAll(".tab-content");
+
+  tabs.forEach(tab => {
+    tab.addEventListener("click", function () {
+      const tabName = this.getAttribute("data-tab");
+
+      // Hapus semua class active dari tombol
+      tabs.forEach(t => t.classList.remove("bg-yellow-600"));
+      this.classList.add("bg-yellow-600");
+
+      // Sembunyikan semua konten
+      contents.forEach(content => content.classList.add("hidden"));
+
+      // Tampilkan yang sesuai
+      document.getElementById(tabName).classList.remove("hidden");
+    });
+  });
+});
+
+  </script>
+
 </x-app-layout>
