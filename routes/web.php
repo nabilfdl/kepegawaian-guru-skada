@@ -9,12 +9,14 @@ use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\EditDataDiriController;
+use App\Http\Middleware\EnsurePasswordIsChanged;
+use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\UserEditVerificationController;
 
 Route::post('/upload-cropped-image', [ImageUploadController::class, 'uploadCroppedImage'])->name('upload.cropped.image');
 Route::post('/delete-image', [ImageUploadController::class, 'deleteImage'])->name('delete.image');
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', EnsurePasswordIsChanged::class)->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/ulang-tahun', [BirthdayController::class, 'birthday'])->name('ulang-tahun');
@@ -24,6 +26,9 @@ Route::middleware('auth')->group(function () {
     
     Route::post('/edit_data_diri/store_edit', [EditDataDiriController::class, 'store_edit'])->name('edit_data_diri.store_edit');
     
+    Route::get('password/change', [PasswordController::class, 'showChangeForm'])->name('password.change');
+    Route::post('password/change', [PasswordController::class, 'changePassword'])->name('password.change.post');
+
     Route::get('/Ganti-Password', function () {
         return view('Ganti-Password');
     })->name('ganti-password');

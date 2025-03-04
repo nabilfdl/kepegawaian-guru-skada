@@ -47,7 +47,7 @@
                         </x-nav-link>
                     </div>
                 @endif
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex sm:hidden">
                     <x-nav-link :href="route('ulang-tahun')" :active="request()->routeIs('ulang-tahun')">
                         {{ __('Ulang Tahun') }}
                     </x-nav-link>
@@ -75,7 +75,7 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('ganti-password')">
+                        <x-dropdown-link :href="route('password.change')">
                             {{ __('Ganti Password') }}
                         </x-dropdown-link>
 

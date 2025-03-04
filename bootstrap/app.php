@@ -15,6 +15,9 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->validateCsrfTokens(except: [
             'location'
         ]);
+        $middleware->use([
+            \App\Http\Middleware\EnsurePasswordIsChanged::class
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

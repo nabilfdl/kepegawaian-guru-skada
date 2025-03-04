@@ -26,7 +26,7 @@ return new class extends Migration
             $table->enum('position', ['PNS', 'P3K', 'Honorer']);
             $table->enum('marital_status', ['Belum Kawin', 'Kawin']);
             $table->enum('status', ['Aktif', 'Purna Tugas']);
-            $table->enum('role', ['Admin', 'Operator', 'User']);
+            $table->enum('role', ['Admin', 'Operator', 'User'])->default('User');
             $table->string('pfp')->nullable(); // Add this line for the profile picture field
             $table->enum('acceptance_status', ['Diverifikasi', 'Ditolak', 'Dalam Proses']);
             $table->timestamps();

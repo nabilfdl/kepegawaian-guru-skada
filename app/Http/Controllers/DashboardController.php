@@ -13,6 +13,7 @@ class DashboardController extends Controller
     public function index()
     {
         $today = Carbon::today()->format('m-d'); // Format MM-DD untuk pencocokan bulan & hari
+        session(['last_greeted' => $today]);
 
         // Ambil user yang lahir di tanggal hari ini
         $birthdayUsers = User::whereRaw("DATE_FORMAT(birth_date, '%m-%d') = ?", [$today])

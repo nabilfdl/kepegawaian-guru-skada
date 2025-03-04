@@ -100,7 +100,7 @@
                         </div>
                         <div>
                             <label class="block text-gray-700">Tanggal Lahir</label>
-                            <input type="date" name="birth_date" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" value="{{ old('birth_date', $user->birth_date) }}" required>
+                            <input type="date" name="birth_date" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" value="{{ old('birth_date', isset($user) ? \Carbon\Carbon::parse($user->birth_date)->format('Y-m-d') : '') }}" required>
                         </div>
                         <div>
                             <label class="block text-gray-700">Posisi</label>

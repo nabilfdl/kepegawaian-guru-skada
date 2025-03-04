@@ -47,7 +47,7 @@
                             <p class="flex items-center">
                                 <span class="text-gray-600 dark:text-gray-400 w-40">Tempat/Tanggal Lahir</span>
                                 <span class="text-gray-600 dark:text-gray-400">:</span>
-                                <span class="font-medium text-gray-800 dark:text-gray-200 ml-2">{{ Auth::user()->birth_place }} / {{ Auth::user()->birth_date }}</span>
+                                <span class="font-medium text-gray-800 dark:text-gray-200 ml-2">{{ Auth::user()->birth_place }} / {{ \Carbon\Carbon::parse(Auth::user()->birth_date)->format('Y-m-d') }}</span>
                             </p>
                             <p class="flex items-center">
                                 <span class="text-gray-600 dark:text-gray-400 w-40">Jenis Kelamin</span>
@@ -128,32 +128,37 @@
             </div>
             <!-- end Statistik Guru -->
 
+            {{-- Ubah agar popup bisa berfungsi dengan baik dan mengeluarkan confetti saat ditekan --}}
             <!-- Notifikasi Ulang Tahun -->
-            @if(isset($birthdayUsers) && $birthdayUsers->isNotEmpty())
-            <div class="bg-gradient-to-r from-yellow-600 to-yellow-700 p-6 mt-6 rounded-xl shadow-lg">
-                <div class="flex items-center space-x-4">
-                    <div class="flex-shrink-0 animate-bounce">
-                        <span class="text-4xl">🎉</span>
+            <div x-data="{ showPopup: localStorage.getItem('lastGreeted') !== '{{ session('last_greeted') }}' }">
+                <template x-if="showPopup">
+                    <div class="bg-gradient-to-r from-yellow-600 to-yellow-700 p-6 mt-6 rounded-xl shadow-lg">
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-shrink-0 animate-bounce">
+                                <span class="text-4xl">🎉</span>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-xl font-bold text-white mb-1">Selamat Ulang Tahun!</h4>
+                                @foreach($birthdayUsers as $user)
+                                    <p class="text-white">Selamat ulang tahun kepada {{ $user->name }} yang ke-{{ \Carbon\Carbon::parse($user->birth_date)->age }} tahun!</p>
+                                @endforeach
+                            </div>
+                            <button @click="showPopup = false; localStorage.setItem('lastGreeted', '{{ session('last_greeted') }}'); triggerConfetti();"
+                                class="px-6 py-2 bg-white text-yellow-500 rounded-lg font-semibold hover:bg-yellow-50 transition-colors duration-300">
+                                Kirim Ucapan
+                            </button>
+                        </div>
                     </div>
-                    <div class="flex-1">
-                        <h4 class="text-xl font-bold text-white mb-1">Selamat Ulang Tahun!</h4>
-                        @foreach($birthdayUsers as $user)
-                        <p class="text-white">Selamat ulang tahun kepada {{ $user->name }} yang ke-{{ \Carbon\Carbon::parse($user->birth_date)->age }} tahun!</p>
-                        @endforeach
-                    </div>
-                    <button class="px-6 py-2 bg-white text-yellow-500 rounded-lg font-semibold hover:bg-yellow-50 transition-colors duration-300">
-                        Kirim Ucapan
-                    </button>
-                </div>
-            </div>
-            @endif
+                </template>
+            </div>            
         <!-- end Notifikasi Ulang Tahun -->
 
         <!-- Tabel Data Guru -->
         <div class="mt-6 bg-gray-900 dark:bg-gray-800 p-6 rounded-xl shadow-lg overflow-hidden">
             <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold text-gray-100 dark:text-gray-200">Data Guru yang Berulang Tahun Hari Ini</h3>
-                <a href="data_guru" class="text-blue-400 hover:text-blue-300 font-semibold">Lihat Semua</a>
+                <h3 class="text-xl font-bold text-gray-100 dark:text-gray-200">Guru yang Berulang Tahun Hari Ini</h3>
+                {{-- Menyembunyikan lihat semua --}}
+                <a href="data_guru" class="hidden text-blue-400 hover:text-blue-300 font-semibold">Lihat Semua</a>
             </div>
             <div class="overflow-x-auto">
                 @if(isset($birthdayUsers) && $birthdayUsers->isNotEmpty())
@@ -166,13 +171,15 @@
                                 <th class="px-6 py-3 text-left text-xs font-semibold text-gray-300 dark:text-gray-300 uppercase tracking-wider">Status</th>
                             </tr>
                         </thead>
+
+                        {{-- Ubah dekorasi tabel menjadi lebih bagus --}}
                         <tbody>
                             @foreach($birthdayUsers as $user)
-                                <tr class="border">
-                                    <td class="border p-2">{{ $user->name }}</td>
-                                    <td class="border p-2">{{ $user->position ?? '-' }}</td>
-                                    <td class="border p-2">{{ optional($user->subject)->subject_name ?? '-' }}</td>
-                                    <td class="border p-2">{{ $user->status }}</td>
+                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
+                                    <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-200">{{ $user->name }}</td>
+                                    <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-200">{{ $user->position ?? '-' }}</td>
+                                    <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-200">{{ optional($user->subject)->subject_name ?? '-' }}</td>
+                                    <td class="px-4 py-3 text-sm text-gray-600 dark:text-gray-200">{{ $user->status }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -184,4 +191,34 @@
         </div>
         <!-- end table data guru -->
     </div>
+
+    {{-- Confetti --}}
+    <!-- Confetti Script -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        function triggerConfetti() {
+            var duration = 2 * 1000; // 2 seconds
+            var end = Date.now() + duration;
+
+            (function frame() {
+                confetti({
+                    particleCount: 5,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 }
+                });
+
+                confetti({
+                    particleCount: 5,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 }
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            })();
+        }
+    </script>
 </x-app-layout>
